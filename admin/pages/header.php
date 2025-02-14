@@ -1,6 +1,6 @@
 <?php
 require_once "../config.php";
-session_start();
+// session_start();
 // echo BASE_PATH . '/login.php';
 // if (!isset($_SESSION['admin_id'])) {
 if (!isset($_SESSION['user_id'])) {

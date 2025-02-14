@@ -73,7 +73,41 @@
 
 <script>
     $(document).ready(function() {
-        $('#usersTable').DataTable();
+        $('#usersTable, #all-users-table').DataTable({
+            dom: 'Bfrtip',  // Adds buttons for export features
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="fas fa-copy"></i> Copy',
+                    className: 'btn btn-secondary btn-sm'
+                },
+                {
+                    extend: 'csv',
+                    text: '<i class="fas fa-file-csv"></i> CSV',
+                    className: 'btn btn-primary btn-sm'
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success btn-sm'
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-danger btn-sm'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i> Print',
+                    className: 'btn btn-info btn-sm'
+                }
+            ],
+            responsive: true, // Makes the table mobile-friendly
+            paging: true,      // Enables pagination
+            searching: true,   // Enables search filter
+            ordering: true,    // Enables sorting
+            info: true         // Shows info (e.g., "Showing 1-10 of 50")
+        });
     });
 </script>
 

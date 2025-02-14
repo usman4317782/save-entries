@@ -4,9 +4,9 @@
 define('BASE_PATH', dirname(__FILE__));
 // echo BASE_PATH;
 // Define the URL path (adjust according to your server setup)
-define('BASE_URL', 'http://localhost/sales_purchse');
-define('EMAIL_VERIFICATION_URL', 'http://localhost/sales_purchse/email-verification.php');
-define('PASSWORD_RESET_URL', 'http://localhost/sales_purchse/reset-forgot-password.php');
+define('BASE_URL', 'https://localhost/save-entries');
+define('EMAIL_VERIFICATION_URL', 'https://localhost/save-entries/email-verification.php');
+define('PASSWORD_RESET_URL', 'https://localhost/save-entries/reset-forgot-password.php');
 // define('PASSWORD_RESET_URL', 'http://localhost/projects/vu_students/anam/anam-php-student-badge-2024/reset-forgot-password.php');
 
 // Database configuration
@@ -52,5 +52,10 @@ if (file_exists(BASE_PATH . "/config.{$env}.php")) {
     require_once BASE_PATH . "/config.{$env}.php";
 }
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // You can add more configuration settings as needed
 
+session_start();
