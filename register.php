@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    $result = $register->registerUser($username, $email, $password, $confirm_password);
+    $result = $register->registerUser($username, $email, $password, $confirm_password, $role);
 
     if ($result['success'] === true) {
         $success_message = $result['message'];

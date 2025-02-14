@@ -1,5 +1,5 @@
 <?php
-
+// echo "config file added";
 // Define the base path of the project
 define('BASE_PATH', dirname(__FILE__));
 // echo BASE_PATH;
@@ -58,4 +58,4 @@ if (empty($_SESSION['csrf_token'])) {
 
 // You can add more configuration settings as needed
 
-session_start();
+// session_start();

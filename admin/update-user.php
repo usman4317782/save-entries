@@ -2,9 +2,9 @@
 require_once "pages/header.php";
 require_once "pages/sidenav.php";
 require_once "pages/topnav.php";
-
+session_start();
 // Generate a CSRF token if one isn't already set
-if (empty($_SESSION['csrf_token'])) {
+if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
@@ -13,14 +13,12 @@ $errors = [];
 $success_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate CSRF token
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("Invalid CSRF token! Please try again.");
+        die("Invalid CSRF token!");
     }
 
-    // Sanitize input
-    $username = htmlspecialchars(trim($_POST['username']));
-    $email = htmlspecialchars(trim($_POST['email']));
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $role = $_POST['role'];
@@ -29,16 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result['success'] === true) {
         $success_message = $result['message'];
-        
-        // Regenerate CSRF token after successful form submission
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  
+        unset($_SESSION['csrf_token']); // Regenerate token after successful registration
     } else {
         $errors = $result['errors'];
     }
 }
-
 ?>
-
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -78,13 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="username">User Name</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
                             </div>
                         </div>
                     </div>
@@ -109,15 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="role">Role</label>
                         <select class="form-control" id="role" name="role" required>
                             <option value="" disabled selected>Select Role</option>
-                            <option value="Manager" <?= isset($_POST['role']) && $_POST['role'] == 'Manager' ? 'selected' : ''; ?>>Manager</option>
-                            <option value="Salesperson" <?= isset($_POST['role']) && $_POST['role'] == 'Salesperson' ? 'selected' : ''; ?>>Salesperson</option>
-                            <option value="Purchaser" <?= isset($_POST['role']) && $_POST['role'] == 'Purchaser' ? 'selected' : ''; ?>>Purchaser</option>
-                            <option value="Supplier" <?= isset($_POST['role']) && $_POST['role'] == 'Supplier' ? 'selected' : ''; ?>>Supplier</option>
-                            <option value="Customer" <?= isset($_POST['role']) && $_POST['role'] == 'Customer' ? 'selected' : ''; ?>>Customer</option>
-                            <option value="Accountant" <?= isset($_POST['role']) && $_POST['role'] == 'Accountant' ? 'selected' : ''; ?>>Accountant</option>
-                            <option value="Warehouse Manager" <?= isset($_POST['role']) && $_POST['role'] == 'Warehouse Manager' ? 'selected' : ''; ?>>Warehouse Manager</option>
-                            <option value="Support" <?= isset($_POST['role']) && $_POST['role'] == 'Support' ? 'selected' : ''; ?>>Support</option>
-                            <option value="Viewer" <?= isset($_POST['role']) && $_POST['role'] == 'Viewer' ? 'selected' : ''; ?>>Viewer</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Salesperson">Salesperson</option>
+                            <option value="Purchaser">Purchaser</option>
+                            <option value="Supplier">Supplier</option>
+                            <option value="Customer" selected>Customer</option>
+                            <option value="Accountant">Accountant</option>
+                            <option value="Warehouse Manager">Warehouse Manager</option>
+                            <option value="Support">Support</option>
+                            <option value="Viewer">Viewer</option>
                         </select>
                     </div>
 

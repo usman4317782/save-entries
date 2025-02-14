@@ -1,9 +1,9 @@
 <?php
+
 require_once "config.php";
 session_start();
-
 if (isset($_SESSION['user_id'])) {
-    echo "<script>window.location.href = 'researcher/';</script>";
+    echo "<script>window.location.href = 'admin/index.php';</script>";
     exit;
 }
 

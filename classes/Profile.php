@@ -11,22 +11,6 @@ class Profile {
         $this->db = Database::getInstance()->getConnection();
     }
 
-    // public function getProfileDetails($user_id) {
-    //     $sql = "SELECT * FROM profiles WHERE user_id = :user_id";
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     return $stmt->fetch();
-    // }
-    // public function getAdminProfileDetails($user_id) {
-    //     // Updated SQL query to select from the admin table
-    //     $sql = "SELECT * FROM admin WHERE admin_id = :user_id"; // Changed from profiles to admin
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     return $stmt->fetch();
-    // }
-
     public function getProfileDetails($user_id) {
         $sql = "SELECT username, email FROM users WHERE id = :user_id";
         $stmt = $this->db->prepare($sql);
@@ -34,6 +18,23 @@ class Profile {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function fetchSingleRecord($user_id) {
+        $sql = "SELECT * FROM users WHERE id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
+    public function deleteProfile($user_id) {
+        $sql = "DELETE FROM users WHERE id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+
 }
 

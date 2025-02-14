@@ -49,19 +49,52 @@
 <!-- Page level custom scripts -->
 <script src="includes/js/demo/datatables-demo.js"></script>
 
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
 
-<script>
-    tinymce.init({
-        selector: 'textarea', // Apply TinyMCE to all textareas
-        plugins: 'lists link image charmap print preview anchor',
-        toolbar: 'undo redo | styleselect | bold italic underline | bullist numlist | link image | removeformat',
-        menubar: false,
-        branding: false,
-        height: 300
+
+<!-- <script>
+$(document).ready(function () {
+    $('#usersTable, #all-users-table').DataTable({
+        dom: 'Bfrtip',  // Adds buttons for export features
+        buttons: [
+            {
+                extend: 'copy',
+                text: '<i class="fas fa-copy"></i> Copy',
+                className: 'btn btn-secondary btn-sm'
+            },
+            {
+                extend: 'csv',
+                text: '<i class="fas fa-file-csv"></i> CSV',
+                className: 'btn btn-primary btn-sm'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i> Excel',
+                className: 'btn btn-success btn-sm'
+            },
+            {
+                extend: 'pdf',
+                text: '<i class="fas fa-file-pdf"></i> PDF',
+                className: 'btn btn-danger btn-sm'
+            },
+            {
+                extend: 'print',
+                text: '<i class="fas fa-print"></i> Print',
+                className: 'btn btn-info btn-sm'
+            }
+        ],
+        responsive: true, // Makes the table mobile-friendly
+        paging: true,      // Enables pagination
+        searching: true,   // Enables search filter
+        ordering: true,    // Enables sorting
+        info: true         // Shows info (e.g., "Showing 1-10 of 50")
     });
-</script>
-
-
+});
+</script> -->
 <script>
     function deleteImage(imageName) {
         // Implement the logic to delete the image
@@ -71,81 +104,7 @@
     }
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('#usersTable, #all-users-table').DataTable({
-            dom: 'Bfrtip',  // Adds buttons for export features
-            buttons: [
-                {
-                    extend: 'copy',
-                    text: '<i class="fas fa-copy"></i> Copy',
-                    className: 'btn btn-secondary btn-sm'
-                },
-                {
-                    extend: 'csv',
-                    text: '<i class="fas fa-file-csv"></i> CSV',
-                    className: 'btn btn-primary btn-sm'
-                },
-                {
-                    extend: 'excel',
-                    text: '<i class="fas fa-file-excel"></i> Excel',
-                    className: 'btn btn-success btn-sm'
-                },
-                {
-                    extend: 'pdf',
-                    text: '<i class="fas fa-file-pdf"></i> PDF',
-                    className: 'btn btn-danger btn-sm'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fas fa-print"></i> Print',
-                    className: 'btn btn-info btn-sm'
-                }
-            ],
-            responsive: true, // Makes the table mobile-friendly
-            paging: true,      // Enables pagination
-            searching: true,   // Enables search filter
-            ordering: true,    // Enables sorting
-            info: true         // Shows info (e.g., "Showing 1-10 of 50")
-        });
-    });
-</script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-<script>
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var salesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Total Sales', 'Total Purchases', 'Total Revenue', 'Total Orders'],
-            datasets: [{
-                label: 'Amount ($)',
-                data: [<?php echo $total_sales; ?>, <?php echo $total_purchases; ?>, <?php echo $total_revenue; ?>, <?php echo $total_orders; ?>],
-                backgroundColor: [
-                    'rgba(40, 167, 69, 0.6)',
-                    'rgba(220, 53, 69, 0.6)',
-                    'rgba(0, 123, 255, 0.6)',
-                    'rgba(255, 193, 7, 0.6)'
-                ],
-                borderColor: [
-                    'rgba(40, 167, 69, 1)',
-                    'rgba(220, 53, 69, 1)',
-                    'rgba(0, 123, 255, 1)',
-                    'rgba(255, 193, 7, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 </body>
 
 </html>

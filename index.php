@@ -1,3 +1,4 @@
+<?php require_once "config.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,23 +74,6 @@
 
 <body>
     <!-- Navbar -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand text-primary" href="#">SaveEntries</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="register.php">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
         <a class="navbar-brand text-primary" href="#">
@@ -109,16 +93,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#products"><i class="fas fa-box-open"></i> Products</a>
                 </li>
+                <?php if (isset($_SESSION['user_id'])): ?>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-white mr-2" href="register.php">
-                        <i class="fas fa-user-plus"></i> Sign Up
-                    </a>
+                    <a class="nav-link btn btn-primary text-white" href="admin/index.php">Go to Dashboard</a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link btn btn-secondary text-white" href="logout.php">Logout</a>
+                </li> -->
+                <?php else: ?>
                 <li class="nav-item">
                     <a class="nav-link btn btn-secondary text-white" href="login.php">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -168,7 +156,9 @@
         <div class="container">
             <h2>Join SaveEntries Today</h2>
             <p class="lead">Start buying and selling instantly with our trusted marketplace.</p>
+            <?php if (!isset($_SESSION['user_id'])): ?>
             <a href="register.php" class="btn btn-success btn-lg">Sign Up Now</a>
+            <?php endif; ?>
         </div>
     </section>
 
