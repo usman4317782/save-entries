@@ -44,7 +44,7 @@ $updateProfile->updateAdminProfile($_POST, $_SESSION['user_id']);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Researcher - Dashboard</title>
+    <title>SaveEntries - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="includes/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
