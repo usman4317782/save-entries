@@ -1,63 +1,43 @@
 <?php
+include __DIR__ . '/../config/config.php';
 
-// Include the config file if not already included
-if (!defined('DB_HOST')) {
-    require_once __DIR__ . '/../config.php';
-}
+class Database
+{
+    private $host = DB_HOST;
+    private $db_name = DB_DATABASE;
+    private $username = DB_USERNAME;
+    private $password = DB_PASSWORD;
+    private $conn;
 
-class Database {
-    private static $instance = null;
-    private $connection;
-
-    private function __construct() {
+    public function __construct()
+    {
         try {
-            $this->connection = new PDO(
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-                DB_USER,
-                DB_PASS
-            );
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            // Database connection logic using PDO
+            $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false
+            ];
+            $this->conn = new PDO($dsn, $this->username, $this->password, $options);
         } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+            // Log the error automatically using the logger if database connection fails
+            if (isset($GLOBALS['logger'])) {
+                $GLOBALS['logger']->error('Database connection failed: ' . $e->getMessage());
+            }
+
+            // Display a user-friendly error message without exposing sensitive information
+            die('Unable to connect to the database. Please try again later.');
         }
     }
 
-    public static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new self();
+    // Getter method to access the database connection
+    public function getConnection()
+    {
+        // Ensure the connection is valid before returning it
+        if ($this->conn === null) {
+            throw new Exception("Database connection is not established.");
         }
-        return self::$instance;
-    }
-
-    public function getConnection() {
-        return $this->connection;
-    }
-
-    public function query($sql, $params = []) {
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
-    }
-
-    public function lastInsertId() {
-        return $this->connection->lastInsertId();
-    }
-
-    public function selectAll($table, $columns = '*', $where = '', $params = []) {
-        $sql = "SELECT $columns FROM $table";
-        if (!empty($where)) {
-            $sql .= " WHERE $where";
-        }
-        $stmt = $this->query($sql, $params);
-        return $stmt->fetchAll();
-    }
-
-    // Prevent cloning of the instance
-    private function __clone() {}
-
-    // Prevent unserializing of the instance
-    public function __wakeup() {
-        throw new Exception("Cannot unserialize singleton");
+        return $this->conn;
     }
 }

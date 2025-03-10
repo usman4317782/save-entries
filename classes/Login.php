@@ -1,67 +1,77 @@
 <?php
+session_start();
+// include_once __DIR__ . '/../config/Database.php';
+include_once 'Database.php';
 
-require_once __DIR__ . '/../config.php';
-require_once __DIR__ . '/Database.php';
+// Assuming you have a global logger like Monolog configured
+// You can replace the following line with your actual logger setup if needed
+// Example: $logger = new Monolog\Logger('user-activity'); 
 
-class Login {
+class User {
     private $db;
+    private $logger;
 
-    public function __construct() {
-        // Get the singleton instance of the Database
-        $this->db = Database::getInstance()->getConnection();
+    public function __construct($logger) {
+        $this->db = new Database();
+        $this->logger = $logger;  // Injecting the logger instance
     }
 
-    public function login($loginInput, $password) {
-        // Determine if input is an email or a username
-        $column = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    /**
+     * Register a New User
+     */
+    // Registration logic can go here
 
-        // SQL query to find the user by email or username
-        $sql = "SELECT * FROM users WHERE $column = :loginInput LIMIT 1";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':loginInput', $loginInput, PDO::PARAM_STR);
-        $stmt->execute();
-        $user = $stmt->fetch();
+    /**
+     * Login User
+     */
+    public function login($username, $password) {
+        $query = "SELECT * FROM users WHERE email = ?";
+        $result = $this->db->executeQuery($query, [$username]);
+        $user = $result->fetch_assoc();
 
-        // Check if user exists
-        if (!$user) {
-            return "Invalid credentials. User not found.";
+        if ($user && password_verify($password, $user['password'])) {
+            // Successful login
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['uu_id'] = $user['uuid'];
+            $_SESSION['username'] = $user['username'];
+
+            // Log successful login
+            $this->logger->info('User logged in successfully', [
+                'username' => $username,
+                'user_id' => $user['id']
+            ]);
+            
+            return true;
+        } else {
+            // Log failed login attempt
+            $this->logger->warning('Failed login attempt', [
+                'username' => $username
+            ]);
+            
+            return false;
         }
-
-        // Verify password
-        if (!isset($user['password_hash']) || !password_verify($password, $user['password_hash'])) {
-            return "Incorrect password.";
-        }
-
-        // Check if user is verified
-        if ($user['is_verified'] == 0) {
-            return "User not verified. Kindly verify your profile first and then try again.";
-        }
-
-        // Set user session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_email'] = $user['email'];
-        $_SESSION['user_name'] = $user['username'];
-
-        // Log user activity
-        $this->logUserActivity($user['id']);
-
-        return true; // Login successful
     }
 
-    private function logUserActivity($userId) {
-        $ipAddress = $_SERVER['REMOTE_ADDR']; // Get user's IP address
-        $userAgent = $_SERVER['HTTP_USER_AGENT']; // Get user's browser details
-
-        // SQL query to insert user activity
-        $sql = "INSERT INTO user_activity (user_id, login_time, ip_address, user_agent) VALUES (:user_id, NOW(), :ip_address, :user_agent)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':ip_address', $ipAddress, PDO::PARAM_STR);
-        $stmt->bindParam(':user_agent', $userAgent, PDO::PARAM_STR);
-        $stmt->execute();
-    }
-
+    /**
+     * Check if User is Logged In
+     */
     public function isLoggedIn() {
         return isset($_SESSION['user_id']);
+    }
+
+    /**
+     * Logout User
+     */
+    public function logout() {
+        // Log user logout
+        if (isset($_SESSION['user_id'])) {
+            $this->logger->info('User logged out', [
+                'user_id' => $_SESSION['user_id'],
+                'username' => $_SESSION['username']
+            ]);
+        }
+        
+        session_unset();
+        session_destroy();
     }
 }
