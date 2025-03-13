@@ -81,12 +81,32 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Payment Amount</label>
-                        <input type="number" class="form-control" name="payment_amount" min="0">
+                        <label class="form-label">Already Paid Amount</label>
+                        <input type="number" class="form-control" id="alreadyPaidAmount" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">New Payment Amount</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="payment_amount" min="0" value="0">
+                            <button type="button" class="btn btn-outline-secondary" id="fillRemainingBtn" title="Fill with remaining balance">
+                                <i class="bi bi-lightning-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Remaining Balance</label>
+                        <input type="number" class="form-control" id="remainingBalance" readonly>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Transaction ID</label>
                         <input type="text" class="form-control" name="transaction_id" placeholder="For card/bank transfer">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Payment Status</label>
+                        <input type="text" class="form-control" id="paymentStatus" readonly>
                     </div>
                 </div>
 
@@ -94,6 +114,26 @@
                     <div class="col-md-12">
                         <label class="form-label">Payment Notes</label>
                         <textarea class="form-control" name="payment_notes" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6>Payment History</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Transaction ID</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentHistory">
+                                <!-- Payment history will be added here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -191,13 +231,51 @@ $(document).ready(function() {
                         addProductRow(); // Add an empty row if no items
                     }
 
-                    // Load latest payment if exists
+                    // Calculate total paid amount from all payments
+                    let totalPaid = 0;
+                    
+                    // Populate payment history
+                    $('#paymentHistory').empty();
                     if (sale.payments && sale.payments.length > 0) {
+                        sale.payments.forEach(function(payment) {
+                            totalPaid += parseFloat(payment.amount);
+                            
+                            // Add payment to history table
+                            $('#paymentHistory').append(`
+                                <tr>
+                                    <td>${formatDate(payment.payment_date)}</td>
+                                    <td>${parseFloat(payment.amount).toFixed(2)}</td>
+                                    <td>${capitalizeFirstLetter(payment.payment_method)}</td>
+                                    <td>${payment.transaction_id || '-'}</td>
+                                    <td>${payment.notes || '-'}</td>
+                                </tr>
+                            `);
+                        });
+                        
+                        // Set transaction ID and payment notes from the latest payment
                         const latestPayment = sale.payments[0]; // First payment is the latest
-                        $('input[name="payment_amount"]').val(parseFloat(latestPayment.amount).toFixed(2));
                         $('input[name="transaction_id"]').val(latestPayment.transaction_id || '');
                         $('textarea[name="payment_notes"]').val(latestPayment.notes || '');
+                    } else {
+                        $('#paymentHistory').append('<tr><td colspan="5" class="text-center">No payment history found</td></tr>');
                     }
+                    
+                    // Set already paid amount
+                    $('#alreadyPaidAmount').val(totalPaid.toFixed(2));
+                    
+                    // Calculate and set remaining balance
+                    const finalAmount = parseFloat(sale.final_amount);
+                    const remainingBalance = finalAmount - totalPaid;
+                    $('#remainingBalance').val(remainingBalance.toFixed(2));
+                    
+                    // Set payment status
+                    $('#paymentStatus').val(sale.payment_status);
+                    
+                    // Set default new payment to 0
+                    $('input[name="payment_amount"]').val('0');
+                    
+                    // Update payment fields when final amount changes
+                    updatePaymentFields();
                 } else {
                     console.error('Failed to load sale details:', response);
                     alert('Failed to load invoice details');
@@ -330,6 +408,39 @@ $(document).ready(function() {
         const tax = parseFloat($('input[name="tax"]').val()) || 0;
         const finalAmount = subTotal + (subTotal * tax / 100);
         $('input[name="final_amount"]').val(finalAmount.toFixed(2));
+        
+        // Update payment fields when final amount changes
+        updatePaymentFields();
+    }
+    
+    // Update payment fields
+    function updatePaymentFields() {
+        const finalAmount = parseFloat($('input[name="final_amount"]').val()) || 0;
+        const alreadyPaid = parseFloat($('#alreadyPaidAmount').val()) || 0;
+        const newPayment = parseFloat($('input[name="payment_amount"]').val()) || 0;
+        const totalPaid = alreadyPaid + newPayment;
+        const remainingBalance = finalAmount - totalPaid;
+        
+        $('#remainingBalance').val(remainingBalance.toFixed(2));
+        
+        // Update payment status based on the amounts
+        let status = 'pending';
+        let statusClass = 'bg-warning text-dark';
+        
+        if (totalPaid >= finalAmount) {
+            status = 'paid';
+            statusClass = 'bg-success text-white';
+        } else if (totalPaid > 0) {
+            status = 'partially_paid';
+            statusClass = 'bg-info text-white';
+        }
+        
+        const $paymentStatus = $('#paymentStatus');
+        $paymentStatus.val(status);
+        
+        // Apply visual styling
+        $paymentStatus.removeClass('bg-warning bg-success bg-info text-white text-dark');
+        $paymentStatus.addClass(statusClass);
     }
 
     // Initialize event handlers
@@ -344,6 +455,18 @@ $(document).ready(function() {
 
     // Tax input event listener
     $('input[name="tax"]').on('input', calculateTotals);
+
+    // Payment amount input event listener
+    $('input[name="payment_amount"]').on('input', function() {
+        updatePaymentFields();
+    });
+    
+    // Fill remaining balance button
+    $('#fillRemainingBtn').click(function() {
+        const remainingBalance = parseFloat($('#remainingBalance').val()) || 0;
+        $('input[name="payment_amount"]').val(remainingBalance.toFixed(2));
+        updatePaymentFields();
+    });
 
     // Add product row button
     $('#addProductRow').click(function() {
@@ -389,11 +512,12 @@ $(document).ready(function() {
         
         if (!isValid) return;
 
-        const paymentAmount = parseFloat($('input[name="payment_amount"]').val()) || 0;
+        const newPaymentAmount = parseFloat($('input[name="payment_amount"]').val()) || 0;
         const finalAmount = parseFloat($('input[name="final_amount"]').val());
-
-        if (paymentAmount > finalAmount) {
-            alert('Payment amount cannot be greater than the final amount');
+        const alreadyPaid = parseFloat($('#alreadyPaidAmount').val()) || 0;
+        
+        if (newPaymentAmount + alreadyPaid > finalAmount) {
+            alert('Total payment amount cannot be greater than the final amount');
             return;
         }
         
@@ -423,7 +547,7 @@ $(document).ready(function() {
                 tax: $('input[name="tax"]').val(),
                 final_amount: $('input[name="final_amount"]').val(),
                 payment_method: $('select[name="payment_method"]').val(),
-                payment_amount: $('input[name="payment_amount"]').val(),
+                payment_amount: newPaymentAmount > 0 ? $('input[name="payment_amount"]').val() : '',
                 transaction_id: $('input[name="transaction_id"]').val(),
                 payment_notes: $('textarea[name="payment_notes"]').val(),
                 notes: $('textarea[name="notes"]').val(),
@@ -447,6 +571,17 @@ $(document).ready(function() {
     $('#cancelEdit').click(function() {
         window.location.href = `view_invoice.php?id=${saleId}`;
     });
+
+    // Helper function to format date
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleString();
+    }
+    
+    // Helper function to capitalize first letter
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).replace('_', ' ');
+    }
 });
 </script>
 

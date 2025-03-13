@@ -31,17 +31,25 @@ class Customer
     // Fetch all customers with optional filters
     public function getCustomers($search = '', $startDate = '', $endDate = '')
     {
-        $query = "SELECT * FROM {$this->table} WHERE 1=1";
+        $query = "SELECT c.*, 
+                 (SELECT COALESCE(SUM(s.final_amount), 0) FROM sales s WHERE s.customer_id = c.customer_id) as total_sales,
+                 (SELECT COALESCE(SUM(p.amount), 0) FROM payments p JOIN sales s ON p.sale_id = s.id WHERE s.customer_id = c.customer_id) as total_payments,
+                 (SELECT COALESCE(SUM(s.final_amount), 0) - COALESCE(SUM(p.amount), 0) 
+                  FROM sales s 
+                  LEFT JOIN payments p ON s.id = p.sale_id 
+                  WHERE s.customer_id = c.customer_id) as closing_balance
+                 FROM {$this->table} c WHERE 1=1";
+        
         if (!empty($search)) {
-            $query .= " AND name LIKE :search";
+            $query .= " AND c.name LIKE :search";
         }
         if (!empty($startDate)) {
-            $query .= " AND created_at >= :startDate";
+            $query .= " AND c.created_at >= :startDate";
         }
         if (!empty($endDate)) {
-            $query .= " AND created_at <= :endDate";
+            $query .= " AND c.created_at <= :endDate";
         }
-        $query .= " ORDER BY created_at DESC";
+        $query .= " ORDER BY c.created_at DESC";
         
         $stmt = $this->conn->prepare($query);
         if (!empty($search)) {
@@ -60,7 +68,14 @@ class Customer
     // Fetch a single customer by ID
     public function getCustomerById($id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE customer_id = :id";
+        $query = "SELECT c.*, 
+                 (SELECT COALESCE(SUM(s.final_amount), 0) FROM sales s WHERE s.customer_id = c.customer_id) as total_sales,
+                 (SELECT COALESCE(SUM(p.amount), 0) FROM payments p JOIN sales s ON p.sale_id = s.id WHERE s.customer_id = c.customer_id) as total_payments,
+                 (SELECT COALESCE(SUM(s.final_amount), 0) - COALESCE(SUM(p.amount), 0) 
+                  FROM sales s 
+                  LEFT JOIN payments p ON s.id = p.sale_id 
+                  WHERE s.customer_id = c.customer_id) as closing_balance
+                 FROM {$this->table} c WHERE c.customer_id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -111,6 +126,63 @@ class Customer
     {
         $query = "DELETE FROM {$this->table} WHERE customer_id IN (" . implode(',', array_map('intval', $ids)) . ")";
         return $this->conn->exec($query);
+    }
+
+    // Update customer closing balance
+    public function updateClosingBalance($customerId)
+    {
+        try {
+            // Calculate total sales amount
+            $salesQuery = "SELECT COALESCE(SUM(final_amount), 0) as total_sales FROM sales WHERE customer_id = :customer_id";
+            $salesStmt = $this->conn->prepare($salesQuery);
+            $salesStmt->bindValue(':customer_id', $customerId, PDO::PARAM_INT);
+            $salesStmt->execute();
+            $totalSales = $salesStmt->fetch(PDO::FETCH_ASSOC)['total_sales'];
+
+            // Calculate total payments
+            $paymentsQuery = "SELECT COALESCE(SUM(p.amount), 0) as total_payments 
+                             FROM payments p 
+                             JOIN sales s ON p.sale_id = s.id 
+                             WHERE s.customer_id = :customer_id";
+            $paymentsStmt = $this->conn->prepare($paymentsQuery);
+            $paymentsStmt->bindValue(':customer_id', $customerId, PDO::PARAM_INT);
+            $paymentsStmt->execute();
+            $totalPayments = $paymentsStmt->fetch(PDO::FETCH_ASSOC)['total_payments'];
+
+            // Calculate closing balance
+            $closingBalance = $totalSales - $totalPayments;
+
+            // Update customer record
+            $updateQuery = "UPDATE {$this->table} SET closing_balance = :closing_balance WHERE customer_id = :customer_id";
+            $updateStmt = $this->conn->prepare($updateQuery);
+            $updateStmt->bindValue(':closing_balance', $closingBalance, PDO::PARAM_STR);
+            $updateStmt->bindValue(':customer_id', $customerId, PDO::PARAM_INT);
+            return $updateStmt->execute();
+        } catch (PDOException $e) {
+            // Log error
+            error_log("Error updating customer closing balance: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Update all customers' closing balances
+    public function updateAllClosingBalances()
+    {
+        try {
+            $query = "SELECT customer_id FROM {$this->table}";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($customers as $customer) {
+                $this->updateClosingBalance($customer['customer_id']);
+            }
+            return true;
+        } catch (PDOException $e) {
+            // Log error
+            error_log("Error updating all customer closing balances: " . $e->getMessage());
+            return false;
+        }
     }
 }
 ?>

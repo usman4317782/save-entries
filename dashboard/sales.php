@@ -56,6 +56,7 @@
                             <th>Customer</th>
                             <th>Date</th>
                             <th>Total Amount</th>
+                            <th>Remaining Balance</th>
                             <th>Payment Status</th>
                             <th>Actions</th>
                         </tr>
@@ -532,6 +533,16 @@ $(document).ready(function() {
                 data: 'final_amount',
                 render: function(data) {
                     return parseFloat(data).toFixed(2);
+                }
+            },
+            { 
+                data: 'remaining_balance',
+                render: function(data) {
+                    if (parseFloat(data) <= 0) {
+                        return '<span class="text-success">0.00</span>';
+                    } else {
+                        return '<span class="text-danger">' + parseFloat(data).toFixed(2) + '</span>';
+                    }
                 }
             },
             { 

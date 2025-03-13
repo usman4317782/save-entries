@@ -29,7 +29,7 @@ class Product
     }
 
     // Fetch all products with filtering options
-    public function getProducts($search = '', $category_id = '', $brand_id = '', $minPrice = '', $maxPrice = '', $startDate = '', $endDate = '', $stock_status = '') {
+    public function getProducts($search = '', $category_id = '', $brand_id = '', $minPrice = '', $maxPrice = '', $startDate = '', $endDate = '', $stock_status = '', $minCost = '', $maxCost = '') {
         $query = "SELECT p.*, 
                   COALESCE(c.category_name, 'N/A') as category_name, 
                   COALESCE(b.brand_name, 'N/A') as brand_name 
@@ -39,7 +39,7 @@ class Product
                   WHERE 1=1";
         
         if (!empty($search)) {
-            $query .= " AND (p.product_name LIKE :search_name OR p.description LIKE :search_desc)";
+            $query .= " AND (p.product_name LIKE :search_name OR p.description LIKE :search_desc OR p.unique_id LIKE :search_unique_id)";
         }
         if (!empty($category_id)) {
             $query .= " AND p.category_id = :category_id";
@@ -52,6 +52,12 @@ class Product
         }
         if (!empty($maxPrice)) {
             $query .= " AND p.price <= :maxPrice";
+        }
+        if (!empty($minCost)) {
+            $query .= " AND p.cost >= :minCost";
+        }
+        if (!empty($maxCost)) {
+            $query .= " AND p.cost <= :maxCost";
         }
         if (!empty($startDate)) {
             $query .= " AND p.created_at >= :startDate";
@@ -69,6 +75,7 @@ class Product
         if (!empty($search)) {
             $stmt->bindValue(':search_name', "%$search%", PDO::PARAM_STR);
             $stmt->bindValue(':search_desc', "%$search%", PDO::PARAM_STR);
+            $stmt->bindValue(':search_unique_id', "%$search%", PDO::PARAM_STR);
         }
         if (!empty($category_id)) {
             $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
@@ -81,6 +88,12 @@ class Product
         }
         if (!empty($maxPrice)) {
             $stmt->bindValue(':maxPrice', $maxPrice, PDO::PARAM_STR);
+        }
+        if (!empty($minCost)) {
+            $stmt->bindValue(':minCost', $minCost, PDO::PARAM_STR);
+        }
+        if (!empty($maxCost)) {
+            $stmt->bindValue(':maxCost', $maxCost, PDO::PARAM_STR);
         }
         if (!empty($startDate)) {
             $stmt->bindValue(':startDate', $startDate, PDO::PARAM_STR);
@@ -99,8 +112,10 @@ class Product
             // Format the data for display
             foreach ($products as &$product) {
                 $product['price'] = $product['price'] ? number_format($product['price'], 2) : 'N/A';
+                $product['cost'] = $product['cost'] ? number_format($product['cost'], 2) : 'N/A';
                 $product['stock_quantity'] = $product['stock_quantity'] !== null ? $product['stock_quantity'] : 'N/A';
                 $product['sku'] = $product['sku'] ?: 'N/A';
+                $product['unique_id'] = $product['unique_id'] ?: 'N/A';
             }
             
             return $products;
@@ -139,23 +154,36 @@ class Product
     }
 
     // Create product
-    public function createProduct($category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status)
+    public function createProduct($category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status, $cost = null, $unique_id = null)
     {
         if ($this->isDuplicate($category_id, $brand_id, $product_name)) {
             return false;
         }
 
-        $query = "INSERT INTO {$this->table} (category_id, brand_id, product_name, description, price, stock_quantity, sku, stock_status) 
-                  VALUES (:category_id, :brand_id, :product_name, :description, :price, :stock_quantity, :sku, :stock_status)";
+        // Check if unique_id already exists
+        if (!empty($unique_id)) {
+            $query = "SELECT COUNT(*) as count FROM {$this->table} WHERE unique_id = :unique_id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':unique_id', $unique_id, PDO::PARAM_STR);
+            $stmt->execute();
+            if ($stmt->fetch(PDO::FETCH_ASSOC)['count'] > 0) {
+                return false;
+            }
+        }
+
+        $query = "INSERT INTO {$this->table} (category_id, brand_id, product_name, description, price, cost, stock_quantity, sku, unique_id, stock_status) 
+                  VALUES (:category_id, :brand_id, :product_name, :description, :price, :cost, :stock_quantity, :sku, :unique_id, :stock_status)";
         $stmt = $this->conn->prepare($query);
 
         // Convert empty strings to null for optional fields
         $category_id = $category_id === '' ? null : $category_id;
         $brand_id = $brand_id === '' ? null : $brand_id;
         $price = $price === '' ? null : $price;
+        $cost = $cost === '' ? null : $cost;
         $stock_quantity = $stock_quantity === '' ? null : $stock_quantity;
         $description = $description === '' ? null : $description;
         $sku = $sku === '' ? null : $sku;
+        $unique_id = $unique_id === '' ? null : $unique_id;
         $stock_status = $stock_status === '' ? 'Non Stock' : $stock_status;
 
         return $stmt->execute([
@@ -164,17 +192,31 @@ class Product
             ':product_name' => $product_name,
             ':description' => $description,
             ':price' => $price,
+            ':cost' => $cost,
             ':stock_quantity' => $stock_quantity,
             ':sku' => $sku,
+            ':unique_id' => $unique_id,
             ':stock_status' => $stock_status
         ]);
     }
 
     // Update product
-    public function updateProduct($id, $category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status)
+    public function updateProduct($id, $category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status, $cost = null, $unique_id = null)
     {
         if ($this->isDuplicate($category_id, $brand_id, $product_name, $id)) {
             return false;
+        }
+
+        // Check if unique_id already exists (but not for this product)
+        if (!empty($unique_id)) {
+            $query = "SELECT COUNT(*) as count FROM {$this->table} WHERE unique_id = :unique_id AND id != :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':unique_id', $unique_id, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->fetch(PDO::FETCH_ASSOC)['count'] > 0) {
+                return false;
+            }
         }
 
         $query = "UPDATE {$this->table} SET 
@@ -183,8 +225,10 @@ class Product
                   product_name = :product_name,
                   description = :description,
                   price = :price,
+                  cost = :cost,
                   stock_quantity = :stock_quantity,
                   sku = :sku,
+                  unique_id = :unique_id,
                   stock_status = :stock_status
                   WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -193,9 +237,11 @@ class Product
         $category_id = $category_id === '' ? null : $category_id;
         $brand_id = $brand_id === '' ? null : $brand_id;
         $price = $price === '' ? null : $price;
+        $cost = $cost === '' ? null : $cost;
         $stock_quantity = $stock_quantity === '' ? null : $stock_quantity;
         $description = $description === '' ? null : $description;
         $sku = $sku === '' ? null : $sku;
+        $unique_id = $unique_id === '' ? null : $unique_id;
         $stock_status = $stock_status === '' ? 'Non Stock' : $stock_status;
 
         return $stmt->execute([
@@ -205,8 +251,10 @@ class Product
             ':product_name' => $product_name,
             ':description' => $description,
             ':price' => $price,
+            ':cost' => $cost,
             ':stock_quantity' => $stock_quantity,
             ':sku' => $sku,
+            ':unique_id' => $unique_id,
             ':stock_status' => $stock_status
         ]);
     }

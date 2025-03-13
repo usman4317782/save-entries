@@ -74,7 +74,8 @@ try {
             $startDate = $_GET['start_date'] ?? '';
             $endDate = $_GET['end_date'] ?? '';
 
-            $query = "SELECT s.id as sale_id, s.*, c.name as customer_name 
+            $query = "SELECT s.id as sale_id, s.*, c.name as customer_name,
+                     (SELECT COALESCE(SUM(amount), 0) FROM payments WHERE sale_id = s.id) as paid_amount
                      FROM sales s 
                      LEFT JOIN customers c ON s.customer_id = c.customer_id 
                      WHERE 1=1";
@@ -108,6 +109,11 @@ try {
 
             // Format data for DataTables
             foreach ($sales as &$row) {
+                // Calculate remaining balance
+                $row['paid_amount'] = floatval($row['paid_amount']);
+                $row['final_amount'] = floatval($row['final_amount']);
+                $row['remaining_balance'] = $row['final_amount'] - $row['paid_amount'];
+                
                 foreach ($row as $key => $value) {
                     if (is_numeric($value)) {
                         $row[$key] = floatval($value);
@@ -359,6 +365,7 @@ try {
                 'Tax',
                 'Final Amount',
                 'Paid Amount',
+                'Remaining Balance',
                 'Payment Status',
                 'Payment Method',
                 'Notes'
@@ -366,6 +373,10 @@ try {
             
             // Add data
             foreach ($sales as $sale) {
+                $paidAmount = $sale['paid_amount'] ?? 0;
+                $finalAmount = $sale['final_amount'];
+                $remainingBalance = $finalAmount - $paidAmount;
+                
                 fputcsv($output, [
                     $sale['invoice_number'],
                     $sale['customer_name'],
@@ -378,7 +389,8 @@ try {
                     $sale['total_amount'],
                     $sale['tax'],
                     $sale['final_amount'],
-                    $sale['paid_amount'] ?? 0,
+                    $paidAmount,
+                    $remainingBalance,
                     $sale['payment_status'],
                     $sale['payment_method'],
                     $sale['notes']

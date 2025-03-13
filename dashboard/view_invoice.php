@@ -18,9 +18,15 @@
                         <input class="form-check-input" type="checkbox" id="showPaymentHistory">
                         <label class="form-check-label" for="showPaymentHistory">Show Payment History</label>
                     </div>
-                    <button id="printInvoice" class="btn btn-primary me-2">
-                        <i class="bi bi-printer me-2"></i>Print
-                    </button>
+                    <div class="dropdown d-inline-block me-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="printOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-printer me-2"></i>Print
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="printOptionsDropdown">
+                            <li><a class="dropdown-item" href="#" id="printInvoiceA4">A4 Format</a></li>
+                            <li><a class="dropdown-item" href="#" id="printInvoice80mm">80mm Receipt</a></li>
+                        </ul>
+                    </div>
                     <button id="editInvoice" class="btn btn-warning me-2">
                         <i class="bi bi-pencil me-2"></i>Edit
                     </button>
@@ -141,43 +147,46 @@
                     </table>
                 </div>
 
-                <!-- Payment history -->
-                <div class="mb-4 payment-history-section" style="display: none;">
-                    <div class="payment-history-box p-3 bg-white rounded shadow-sm">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="bi bi-clock-history text-primary"></i> Payment History
-                            <span class="float-end text-muted small">Total Payments: <span id="totalPayments">0</span></span>
-                        </h6>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-hover payment-history-table">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th style="width: 20%">Date</th>
-                                        <th style="width: 20%" class="text-end">Amount</th>
-                                        <th style="width: 15%">Method</th>
-                                        <th style="width: 20%">Transaction ID</th>
-                                        <th style="width: 25%">Notes</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="paymentsTableBody"></tbody>
-                                <tfoot class="table-light" id="paymentSummaryFoot">
-                                    <tr>
-                                        <td colspan="5" class="text-end">
-                                            <span class="text-muted me-3">Total Paid: <strong class="text-success" id="totalPaidAmount">0.00</strong></span>
-                                            <span class="text-muted">Balance: <strong class="text-danger" id="balanceAmount">0.00</strong></span>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                <!-- Notes and Payment History Container -->
+                <div class="row mb-4 notes-payment-container">
+                    <!-- Notes -->
+                    <div class="col-md-6 mb-4 notes-box-container">
+                        <div class="notes-box p-3 bg-white rounded shadow-sm">
+                            <h6 class="border-bottom pb-2 mb-3">Notes</h6>
+                            <p id="notes" class="mb-0 text-muted fst-italic"></p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Notes -->
-                <div class="mb-4 notes-box-container">
-                    <div class="notes-box p-3 bg-white rounded shadow-sm">
-                        <h6 class="border-bottom pb-2 mb-3">Notes</h6>
-                        <p id="notes" class="mb-0 text-muted fst-italic"></p>
+                    <!-- Payment history -->
+                    <div class="col-md-6 mb-4 payment-history-section" style="display: none;">
+                        <div class="payment-history-box p-3 bg-white rounded shadow-sm">
+                            <h6 class="border-bottom pb-2 mb-3">
+                                <i class="bi bi-clock-history text-primary"></i> Payment History
+                                <span class="float-end text-muted small">Total Payments: <span id="totalPayments">0</span></span>
+                            </h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover payment-history-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 20%">Date</th>
+                                            <th style="width: 20%" class="text-end">Amount</th>
+                                            <th style="width: 15%">Method</th>
+                                            <th style="width: 20%">Transaction ID</th>
+                                            <th style="width: 25%">Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="paymentsTableBody"></tbody>
+                                    <tfoot class="table-light" id="paymentSummaryFoot">
+                                        <tr>
+                                            <td colspan="5" class="text-end">
+                                                <span class="text-muted me-3">Total Paid: <strong class="text-success" id="totalPaidAmount">0.00</strong></span>
+                                                <span class="text-muted">Balance: <strong class="text-danger" id="balanceAmount">0.00</strong></span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -243,7 +252,8 @@
     .sidebar,
     .btn,
     footer,
-    .form-check {
+    .form-check,
+    .dropdown {
         display: none !important;
     }
     
@@ -378,9 +388,15 @@
         background-color: #f9f9f9 !important;
     }
 
-    /* Payment history and notes in same row */
-    .payment-history-section,
-    .notes-box-container {
+    /* Notes and Payment history in same row */
+    .notes-payment-container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .notes-box-container,
+    .payment-history-section {
         width: 50% !important;
         float: left !important;
         padding: 0 5px !important;
@@ -538,6 +554,136 @@
     }
 }
 
+/* 80mm Receipt Print Styles */
+@media print and (max-width: 80mm) {
+    body {
+        width: 80mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    #invoiceContent {
+        width: 72mm !important; /* 80mm - margins */
+        padding: 2mm !important;
+    }
+    
+    /* Company header for 80mm */
+    .row.border-bottom {
+        display: block !important;
+        text-align: center !important;
+    }
+    
+    .col-md-6 {
+        width: 100% !important;
+        float: none !important;
+        text-align: center !important;
+        padding: 0 !important;
+        margin-bottom: 3mm !important;
+    }
+    
+    .col-md-6.text-md-end {
+        text-align: center !important;
+    }
+    
+    #company-logo-container {
+        display: flex !important;
+        justify-content: center !important;
+        margin-bottom: 2mm !important;
+    }
+    
+    #company-logo {
+        max-height: 30px !important;
+        max-width: 60px !important;
+    }
+    
+    .company-name {
+        font-size: 0.9rem !important;
+        margin-bottom: 1mm !important;
+    }
+    
+    .company-details-compact {
+        font-size: 0.6rem !important;
+        line-height: 1 !important;
+    }
+    
+    .invoice-title {
+        font-size: 1rem !important;
+        margin: 1mm 0 !important;
+    }
+    
+    .invoice-number-wrapper,
+    .invoice-date-wrapper {
+        font-size: 0.7rem !important;
+        margin-bottom: 1mm !important;
+    }
+    
+    /* Customer section for 80mm */
+    .customer-section .col-md-6 {
+        width: 100% !important;
+        margin-bottom: 2mm !important;
+    }
+    
+    /* Table for 80mm */
+    .table {
+        font-size: 0.6rem !important;
+        width: 100% !important;
+    }
+    
+    .table th {
+        padding: 1mm !important;
+        font-size: 0.6rem !important;
+    }
+    
+    .table td {
+        padding: 1mm !important;
+        font-size: 0.6rem !important;
+    }
+    
+    /* Hide some columns in 80mm mode */
+    .table th:nth-child(4),
+    .table td:nth-child(4) {
+        display: none !important;
+    }
+    
+    /* Adjust column widths for 80mm */
+    .table th:nth-child(1) { width: 50% !important; }
+    .table th:nth-child(2) { width: 15% !important; }
+    .table th:nth-child(3) { width: 15% !important; }
+    .table th:nth-child(5) { width: 20% !important; }
+    
+    /* Notes and Payment History for 80mm */
+    .notes-box-container,
+    .payment-history-section {
+        width: 100% !important;
+        float: none !important;
+        margin-bottom: 2mm !important;
+    }
+    
+    .payment-history-table th:nth-child(3),
+    .payment-history-table td:nth-child(3),
+    .payment-history-table th:nth-child(4),
+    .payment-history-table td:nth-child(4) {
+        display: none !important;
+    }
+    
+    .payment-history-table th:nth-child(1) { width: 40% !important; }
+    .payment-history-table th:nth-child(2) { width: 30% !important; }
+    .payment-history-table th:nth-child(5) { width: 30% !important; }
+    
+    /* Adjust font sizes for 80mm */
+    h6 {
+        font-size: 0.7rem !important;
+    }
+    
+    #notes {
+        font-size: 0.6rem !important;
+    }
+    
+    tfoot tr td {
+        font-size: 0.65rem !important;
+    }
+}
+
 .company-details-compact {
     font-size: 0.9rem;
     line-height: 1.5;
@@ -567,6 +713,24 @@
     background: #fff;
     border: 1px solid rgba(0,0,0,.125);
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+/* Notes and Payment History Layout */
+.notes-payment-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notes-box-container,
+.payment-history-section {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .notes-box-container,
+    .payment-history-section {
+        padding: 0 0.5rem;
+    }
 }
 </style>
 
@@ -714,8 +878,8 @@ $(document).ready(function() {
         }
     });
 
-    // Print invoice
-    $('#printInvoice').click(function() {
+    // Print invoice - A4 format
+    $('#printInvoiceA4').click(function() {
         // For print preview, ensure notes are visible alongside payment history
         if ($('#showPaymentHistory').is(':checked')) {
             $('.notes-box-container').addClass('print-with-payment-history');
@@ -728,7 +892,51 @@ $(document).ready(function() {
             $('.customer-section').addClass('show-in-print');
         }
         
+        // Set to A4 print mode
+        $('body').removeClass('print-80mm');
+        
         window.print();
+    });
+    
+    // Print invoice - 80mm receipt format
+    $('#printInvoice80mm').click(function() {
+        // Only show payment history in 80mm mode if checkbox is checked
+        if ($('#showPaymentHistory').is(':checked')) {
+            $('.payment-history-section').show().addClass('show-in-print');
+            $('.notes-box-container').addClass('print-with-payment-history');
+        } else {
+            $('.payment-history-section').hide().removeClass('show-in-print');
+            $('.notes-box-container').removeClass('print-with-payment-history');
+        }
+        
+        // Only show customer details in 80mm mode if checkbox is checked
+        if ($('#showCustomerDetails').is(':checked')) {
+            $('.customer-section').show().addClass('show-in-print');
+        } else {
+            $('.customer-section').hide().removeClass('show-in-print');
+        }
+        
+        // Set to 80mm print mode
+        $('body').addClass('print-80mm');
+        
+        window.print();
+        
+        // Reset after printing
+        $('body').removeClass('print-80mm');
+        
+        // Reset visibility based on checkboxes (in case they were changed during print preview)
+        if (!$('#showPaymentHistory').is(':checked')) {
+            $('.payment-history-section').hide().removeClass('show-in-print');
+            $('.notes-box-container').removeClass('print-with-payment-history');
+        } else {
+            $('.payment-history-section').show().addClass('show-in-print');
+        }
+        
+        if (!$('#showCustomerDetails').is(':checked')) {
+            $('.customer-section').hide().removeClass('show-in-print');
+        } else {
+            $('.customer-section').show().addClass('show-in-print');
+        }
     });
 
     // Edit invoice

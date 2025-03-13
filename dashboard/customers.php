@@ -7,10 +7,16 @@
     <div class="container mt-4">
         <h2 class="mb-3">Customer Management</h2>
         <div class="d-flex justify-content-between mb-3">
-            <button id="addCustomerBtn" class="btn btn-primary btn-icon">
-                <i class="bi bi-plus-circle"></i>
-                <span class="btn-text">Add Customer</span>
-            </button>
+            <div>
+                <button id="addCustomerBtn" class="btn btn-primary btn-icon">
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="btn-text">Add Customer</span>
+                </button>
+                <button id="updateBalancesBtn" class="btn btn-success btn-icon ms-2">
+                    <i class="bi bi-arrow-repeat"></i>
+                    <span class="btn-text">Update Balances</span>
+                </button>
+            </div>
             <button id="bulkDeleteBtn" class="btn btn-danger btn-icon">
                 <i class="bi bi-trash"></i>
                 <span class="btn-text">Bulk Delete</span>
@@ -42,6 +48,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact Number</th>
+                    <th>Closing Balance</th>
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
@@ -71,6 +78,10 @@
                         <div class="mb-3">
                             <label class="form-label">Contact Number</label>
                             <input type="text" class="form-control" name="contact_number" required>
+                        </div>
+                        <div class="mb-3" id="balanceContainer" style="display: none;">
+                            <label class="form-label">Closing Balance</label>
+                            <input type="text" class="form-control" id="closingBalance" readonly>
                         </div>
                         <button type="submit" class="btn btn-success btn-icon">
                             <i class="bi bi-save"></i>
@@ -108,6 +119,12 @@
                     "data": "contact_number"
                 },
                 {
+                    "data": "closing_balance",
+                    render: function(data) {
+                        return parseFloat(data).toFixed(2);
+                    }
+                },
+                {
                     "data": "created_at"
                 },
                 {
@@ -142,7 +159,19 @@
             $('#customerModalLabel').text('Add Customer');
             $('#customerForm')[0].reset();
             $('#customerId').val('');
+            $('#balanceContainer').hide();
             $('#customerModal').modal('show');
+        });
+
+        // Update all customer balances
+        $('#updateBalancesBtn').click(function() {
+            if (confirm('Are you sure you want to update all customer balances?')) {
+                $.get('customer_actions.php?action=update_balances', function(response) {
+                    response = JSON.parse(response);
+                    alert(response.message);
+                    table.ajax.reload();
+                });
+            }
         });
 
         // Edit Customer
@@ -154,6 +183,8 @@
                 $('input[name="name"]').val(customer.name);
                 $('input[name="address"]').val(customer.address);
                 $('input[name="contact_number"]').val(customer.contact_number);
+                $('#closingBalance').val(parseFloat(customer.closing_balance).toFixed(2));
+                $('#balanceContainer').show();
                 $('#customerModalLabel').text('Edit Customer');
                 $('#customerModal').modal('show');
             });

@@ -122,6 +122,10 @@ class Sale {
             }
 
             $this->db->commit();
+            
+            // Update customer closing balance
+            $this->updateCustomerBalance($data['customer_id']);
+            
             return $saleId;
         } catch (PDOException $e) {
             $this->db->rollBack();
@@ -152,6 +156,16 @@ class Sale {
             $this->updateSalePaymentStatus($data['sale_id']);
 
             $this->db->commit();
+            
+            // Get customer ID from sale
+            $query = "SELECT customer_id FROM sales WHERE id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$data['sale_id']]);
+            $customerId = $stmt->fetch(PDO::FETCH_ASSOC)['customer_id'];
+            
+            // Update customer closing balance
+            $this->updateCustomerBalance($customerId);
+            
             return true;
         } catch (PDOException $e) {
             $this->db->rollBack();
@@ -364,6 +378,18 @@ class Sale {
             $this->db->rollBack();
             $this->logger->logError("Error in bulk delete sales: " . $e->getMessage());
             return ['status' => 'error', 'message' => 'Failed to delete sales'];
+        }
+    }
+
+    // Update customer balance
+    private function updateCustomerBalance($customerId) {
+        try {
+            require_once 'Customer.php';
+            $customer = new Customer();
+            return $customer->updateClosingBalance($customerId);
+        } catch (Exception $e) {
+            $this->logger->logError("Error updating customer balance: " . $e->getMessage());
+            return false;
         }
     }
 }

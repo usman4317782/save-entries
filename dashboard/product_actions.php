@@ -18,12 +18,14 @@ if ($action === 'fetch') {
     $brand_id = $_GET['brand_id'] ?? '';
     $minPrice = $_GET['minPrice'] ?? '';
     $maxPrice = $_GET['maxPrice'] ?? '';
+    $minCost = $_GET['minCost'] ?? '';
+    $maxCost = $_GET['maxCost'] ?? '';
     $startDate = $_GET['startDate'] ?? '';
     $endDate = $_GET['endDate'] ?? '';
     $stock_status = $_GET['stock_status'] ?? '';
 
     try {
-        $products = $product->getProducts($search, $category_id, $brand_id, $minPrice, $maxPrice, $startDate, $endDate, $stock_status);
+        $products = $product->getProducts($search, $category_id, $brand_id, $minPrice, $maxPrice, $startDate, $endDate, $stock_status, $minCost, $maxCost);
         echo json_encode(["data" => $products]);
     } catch (Exception $e) {
         http_response_code(500);
@@ -47,8 +49,10 @@ if ($action === 'add') {
     $product_name = $_POST['product_name'] ?? '';
     $description = $_POST['description'] ?? null;
     $price = $_POST['price'] ? floatval($_POST['price']) : null;
+    $cost = $_POST['cost'] ? floatval($_POST['cost']) : null;
     $stock_quantity = $_POST['stock_quantity'] ? intval($_POST['stock_quantity']) : null;
     $sku = $_POST['sku'] ?? null;
+    $unique_id = $_POST['unique_id'] ?? null;
     $stock_status = $_POST['stock_status'] ?? 'Non Stock';
 
     if (empty($product_name)) {
@@ -61,7 +65,22 @@ if ($action === 'add') {
         exit;
     }
 
-    if ($product->createProduct($category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status)) {
+    // Check if unique_id is provided and not empty
+    if (!empty($unique_id)) {
+        // Check if unique_id already exists
+        $query = "SELECT COUNT(*) as count FROM products WHERE unique_id = :unique_id";
+        $db = new Database();
+        $conn = $db->getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':unique_id', $unique_id, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->fetch(PDO::FETCH_ASSOC)['count'] > 0) {
+            echo json_encode(["success" => false, "message" => "Error! Product Unique ID already exists."]);
+            exit;
+        }
+    }
+
+    if ($product->createProduct($category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status, $cost, $unique_id)) {
         echo json_encode(["success" => true, "message" => "Product added successfully"]);
     } else {
         echo json_encode(["success" => false, "message" => "Failed to add product"]);
@@ -76,8 +95,10 @@ if ($action === 'update') {
     $product_name = $_POST['product_name'] ?? '';
     $description = $_POST['description'] ?? null;
     $price = $_POST['price'] ? floatval($_POST['price']) : null;
+    $cost = $_POST['cost'] ? floatval($_POST['cost']) : null;
     $stock_quantity = $_POST['stock_quantity'] ? intval($_POST['stock_quantity']) : null;
     $sku = $_POST['sku'] ?? null;
+    $unique_id = $_POST['unique_id'] ?? null;
     $stock_status = $_POST['stock_status'] ?? 'Non Stock';
 
     if (empty($product_name)) {
@@ -90,7 +111,23 @@ if ($action === 'update') {
         exit;
     }
 
-    if ($product->updateProduct($id, $category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status)) {
+    // Check if unique_id is provided and not empty
+    if (!empty($unique_id)) {
+        // Check if unique_id already exists (but not for this product)
+        $query = "SELECT COUNT(*) as count FROM products WHERE unique_id = :unique_id AND id != :id";
+        $db = new Database();
+        $conn = $db->getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':unique_id', $unique_id, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->fetch(PDO::FETCH_ASSOC)['count'] > 0) {
+            echo json_encode(["success" => false, "message" => "Error! Product Unique ID already exists."]);
+            exit;
+        }
+    }
+
+    if ($product->updateProduct($id, $category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status, $cost, $unique_id)) {
         echo json_encode(["success" => true, "message" => "Product updated successfully"]);
     } else {
         echo json_encode(["success" => false, "message" => "Failed to update product"]);

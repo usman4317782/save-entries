@@ -70,6 +70,8 @@ if ($action === 'update') {
     }
 
     if ($customer->updateCustomer($id, $name, $address, $contact_number)) {
+        // Update closing balance
+        $customer->updateClosingBalance($id);
         echo json_encode(["success" => true, "message" => "Customer updated successfully"]);
     } else {
         echo json_encode(["success" => false, "message" => "Failed to update customer"]);
@@ -87,6 +89,15 @@ if ($action === 'bulk_delete') {
         }
     } else {
         echo json_encode(["success" => false, "message" => "No customers selected"]);
+    }
+    exit;
+}
+
+if ($action === 'update_balances') {
+    if ($customer->updateAllClosingBalances()) {
+        echo json_encode(["success" => true, "message" => "All customer balances updated successfully"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Failed to update customer balances"]);
     }
     exit;
 }

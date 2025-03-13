@@ -73,6 +73,16 @@
                         <input type="number" id="maxPrice" class="form-control" placeholder="Max price">
                     </div>
 
+                    <!-- Cost Range -->
+                    <div class="col-md-3">
+                        <label class="form-label">Min Cost</label>
+                        <input type="number" id="minCost" class="form-control" placeholder="Min cost">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Max Cost</label>
+                        <input type="number" id="maxCost" class="form-control" placeholder="Max cost">
+                    </div>
+
                     <!-- Clear Filters -->
                     <div class="col-md-6 d-flex align-items-end">
                         <button id="clearFilters" class="btn btn-outline-secondary">
@@ -87,13 +97,16 @@
                         <thead class="table-light">
                             <tr>
                                 <th><input type="checkbox" id="selectAll"></th>
+                                <th>Sr. No.</th>
                                 <th>ID</th>
                                 <th>SKU</th>
+                                <th>Unique ID</th>
                                 <th>Product Name</th>
                                 <th>Description</th>
                                 <th>Category</th>
                                 <th>Brand</th>
                                 <th>Price</th>
+                                <th>Cost</th>
                                 <th>Stock Quantity</th>
                                 <th>Stock Status</th>
                                 <th>Created At</th>
@@ -125,6 +138,10 @@
                         <div class="mb-3">
                             <label class="form-label">SKU</label>
                             <input type="text" class="form-control" name="sku">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Unique ID</label>
+                            <input type="text" class="form-control" name="unique_id">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Stock Status</label>
@@ -162,6 +179,10 @@
                         <div class="mb-3">
                             <label class="form-label">Price</label>
                             <input type="number" class="form-control" name="price" step="0.01" min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Cost</label>
+                            <input type="number" class="form-control" name="cost" step="0.01" min="0">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Stock Quantity</label>
@@ -386,6 +407,8 @@
                         stock_status: $('#stockStatusFilter').val(),
                         minPrice: $('#minPrice').val(),
                         maxPrice: $('#maxPrice').val(),
+                        minCost: $('#minCost').val(),
+                        maxCost: $('#maxCost').val(),
                         startDate: $('#dateRange').val().split(' - ')[0],
                         endDate: $('#dateRange').val().split(' - ')[1]
                     };
@@ -403,10 +426,19 @@
                     }
                 },
                 {
+                    "data": null,
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1; // Add 1 because DataTables uses zero-based indexing
+                    }
+                },
+                {
                     "data": "id"
                 },
                 {
                     "data": "sku"
+                },
+                {
+                    "data": "unique_id"
                 },
                 {
                     "data": "product_name"
@@ -428,6 +460,12 @@
                 },
                 {
                     "data": "price",
+                    render: function(data) {
+                        return data ? parseFloat(data).toFixed(2) : '';
+                    }
+                },
+                {
+                    "data": "cost",
                     render: function(data) {
                         return data ? parseFloat(data).toFixed(2) : '';
                     }
@@ -493,11 +531,13 @@
                 $('#productId').val(product.id);
                 $('input[name="product_name"]').val(product.product_name);
                 $('input[name="sku"]').val(product.sku);
+                $('input[name="unique_id"]').val(product.unique_id);
                 $('select[name="stock_status"]').val(product.stock_status);
                 $('textarea[name="description"]').val(product.description);
                 $('select[name="category_id"]').val(product.category_id);
                 $('select[name="brand_id"]').val(product.brand_id);
                 $('input[name="price"]').val(product.price);
+                $('input[name="cost"]').val(product.cost);
                 $('input[name="stock_quantity"]').val(product.stock_quantity);
                 $('#productModalLabel').text('Edit Product');
                 $('#productModal').modal('show');
@@ -558,7 +598,7 @@
 
         // Dynamic Filters
         let filterTimeout;
-        $('#searchInput, #categoryFilter, #brandFilter, #stockStatusFilter, #minPrice, #maxPrice, #dateRange').on('input change', function() {
+        $('#searchInput, #categoryFilter, #brandFilter, #stockStatusFilter, #minPrice, #maxPrice, #minCost, #maxCost, #dateRange').on('input change', function() {
             clearTimeout(filterTimeout);
             filterTimeout = setTimeout(function() {
                 table.ajax.reload();
@@ -573,6 +613,8 @@
             $('#stockStatusFilter').val('').trigger('change'); // Trigger Select2 change
             $('#minPrice').val('');
             $('#maxPrice').val('');
+            $('#minCost').val('');
+            $('#maxCost').val('');
             $('#dateRange').val('');
             table.ajax.reload();
         });
