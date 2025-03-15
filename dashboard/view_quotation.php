@@ -8,36 +8,35 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h5 class="mb-0">Invoice Details</h5>
+                <h5 class="mb-0">Quotation Details</h5>
                 <div>
                     <div class="form-check form-switch d-inline-block me-2">
                         <input class="form-check-input" type="checkbox" id="showCustomerDetails">
                         <label class="form-check-label" for="showCustomerDetails">Show Customer Details</label>
-                    </div>
-                    <div class="form-check form-switch d-inline-block me-2">
-                        <input class="form-check-input" type="checkbox" id="showPaymentHistory">
-                        <label class="form-check-label" for="showPaymentHistory">Show Payment History</label>
                     </div>
                     <div class="dropdown d-inline-block me-2">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="printOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-printer me-2"></i>Print
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="printOptionsDropdown">
-                            <li><a class="dropdown-item" href="#" id="printInvoiceA4">A4 Format</a></li>
-                            <li><a class="dropdown-item" href="#" id="printInvoice80mm">80mm Receipt</a></li>
+                            <li><a class="dropdown-item" href="#" id="printQuotationA4">A4 Format</a></li>
+                            <li><a class="dropdown-item" href="#" id="printQuotation80mm">80mm Receipt</a></li>
                         </ul>
                     </div>
-                    <button id="editInvoice" class="btn btn-warning me-2">
+                    <button id="convertToSale" class="btn btn-success me-2">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Convert to Sale
+                    </button>
+                    <button id="editQuotation" class="btn btn-warning me-2">
                         <i class="bi bi-pencil me-2"></i>Edit
                     </button>
-                    <button id="deleteInvoice" class="btn btn-danger">
+                    <button id="deleteQuotation" class="btn btn-danger">
                         <i class="bi bi-trash me-2"></i>Delete
                     </button>
                 </div>
             </div>
 
-            <div id="invoiceContent" class="invoice-wrapper">
-                <!-- Invoice header with company info and logo -->
+            <div id="quotationContent" class="quotation-wrapper">
+                <!-- Quotation header with company info and logo -->
                 <div class="row border-bottom pb-4 mb-4">
                     <div class="col-md-6 d-flex align-items-center">
                         <div id="company-logo-container" class="me-3">
@@ -71,19 +70,27 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <h2 class="invoice-title mb-2">INVOICE</h2>
-                        <div class="invoice-number-wrapper">
-                            <strong>Invoice #:</strong>
-                            <span id="invoiceNumber" class="ms-2"></span>
+                        <h2 class="quotation-title mb-2">QUOTATION</h2>
+                        <div class="quotation-number-wrapper">
+                            <strong>Quotation #:</strong>
+                            <span id="quotationNumber" class="ms-2"></span>
                         </div>
-                        <div class="invoice-date-wrapper">
+                        <div class="quotation-date-wrapper">
                             <strong>Date:</strong>
                             <span id="createdDate" class="ms-2"></span>
+                        </div>
+                        <div class="quotation-validity-wrapper">
+                            <strong>Valid Until:</strong>
+                            <span id="validUntil" class="ms-2"></span>
+                        </div>
+                        <div class="quotation-status-wrapper">
+                            <strong>Status:</strong>
+                            <span id="quotationStatus" class="ms-2"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Customer and Payment Info -->
+                <!-- Customer Info -->
                 <div class="row mb-4 customer-section" style="display: none;">
                     <div class="col-md-6">
                         <div class="customer-info-box p-3 bg-white rounded shadow-sm">
@@ -99,19 +106,6 @@
                             <div class="mb-2">
                                 <strong class="text-muted">Address:</strong>
                                 <span id="customerAddress" class="ms-2"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="payment-info-box p-3 bg-white rounded shadow-sm">
-                            <h6 class="border-bottom pb-2 mb-3">Payment Information</h6>
-                            <div class="mb-2">
-                                <strong class="text-muted">Status:</strong>
-                                <span id="paymentStatus" class="ms-2"></span>
-                            </div>
-                            <div class="mb-2">
-                                <strong class="text-muted">Method:</strong>
-                                <span id="paymentMethod" class="ms-2"></span>
                             </div>
                         </div>
                     </div>
@@ -147,45 +141,12 @@
                     </table>
                 </div>
 
-                <!-- Notes and Payment History Container -->
-                <div class="row mb-4 notes-payment-container">
-                    <!-- Notes -->
-                    <div class="col-md-6 mb-4 notes-box-container">
+                <!-- Notes -->
+                <div class="row mb-4">
+                    <div class="col-md-12 mb-4">
                         <div class="notes-box p-3 bg-white rounded shadow-sm">
                             <h6 class="border-bottom pb-2 mb-3">Notes</h6>
                             <p id="notes" class="mb-0 text-muted fst-italic"></p>
-                        </div>
-                    </div>
-
-                    <!-- Payment history -->
-                    <div class="col-md-6 mb-4 payment-history-section" style="display: none;">
-                        <div class="payment-history-box p-3 bg-white rounded shadow-sm">
-                            <h6 class="border-bottom pb-2 mb-3">
-                                <i class="bi bi-clock-history text-primary"></i> Payment History
-                                <span class="float-end text-muted small">Total Payments: <span id="totalPayments">0</span></span>
-                            </h6>
-                            <div class="table-responsive">
-                                <table class="table table-sm table-hover payment-history-table">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th style="width: 20%">Date</th>
-                                            <th style="width: 20%" class="text-end">Amount</th>
-                                            <th style="width: 15%">Method</th>
-                                            <th style="width: 20%">Transaction ID</th>
-                                            <th style="width: 25%">Notes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="paymentsTableBody"></tbody>
-                                    <tfoot class="table-light" id="paymentSummaryFoot">
-                                        <tr>
-                                            <td colspan="5" class="text-end">
-                                                <span class="text-muted me-3">Total Paid: <strong class="text-success" id="totalPaidAmount">0.00</strong></span>
-                                                <span class="text-muted">Balance: <strong class="text-danger" id="balanceAmount">0.00</strong></span>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +160,7 @@
 </div>
 
 <style>
-.invoice-wrapper {
+.quotation-wrapper {
     background-color: #f8f9fa;
     padding: 2rem;
     border-radius: 0.5rem;
@@ -215,15 +176,13 @@
     font-size: 0.9rem;
 }
 
-.invoice-title {
+.quotation-title {
     color: #2b2d42;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .customer-info-box,
-.payment-info-box,
-.payment-history-box,
 .notes-box {
     background-color: #ffffff;
     border: 1px solid rgba(0,0,0,0.1);
@@ -231,8 +190,6 @@
 }
 
 .customer-info-box:hover,
-.payment-info-box:hover,
-.payment-history-box:hover,
 .notes-box:hover {
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
 }
@@ -276,7 +233,7 @@
         width: 100% !important;
     }
 
-    .invoice-wrapper {
+    .quotation-wrapper {
         padding: 0 !important;
         margin: 0 !important;
         background: none !important;
@@ -290,7 +247,7 @@
         padding-bottom: 5px !important;
     }
 
-    /* Make company details and invoice details in same row more compact */
+    /* Make company details and quotation details in same row more compact */
     .col-md-6 {
         width: 50% !important;
         float: left !important;
@@ -318,18 +275,20 @@
         font-size: 0.7rem !important;
     }
 
-    .invoice-title {
+    .quotation-title {
         font-size: 1.2rem !important;
         margin-bottom: 2px !important;
     }
 
-    .invoice-number-wrapper,
-    .invoice-date-wrapper {
+    .quotation-number-wrapper,
+    .quotation-date-wrapper,
+    .quotation-validity-wrapper,
+    .quotation-status-wrapper {
         font-size: 0.8rem !important;
         margin-bottom: 2px !important;
     }
 
-    /* Customer and payment info boxes in same row */
+    /* Customer info boxes in same row */
     .customer-section {
         display: flex !important;
         flex-wrap: wrap !important;
@@ -341,8 +300,7 @@
         padding: 0 5px !important;
     }
 
-    .customer-info-box,
-    .payment-info-box {
+    .customer-info-box {
         padding: 5px !important;
         margin-bottom: 5px !important;
         border: 1px solid #ddd !important;
@@ -350,16 +308,14 @@
         height: 100% !important;
     }
 
-    .customer-info-box h6,
-    .payment-info-box h6 {
+    .customer-info-box h6 {
         font-size: 0.8rem !important;
         margin-bottom: 3px !important;
         padding-bottom: 3px !important;
         border-bottom: 1px solid #ddd !important;
     }
 
-    .customer-info-box .mb-2,
-    .payment-info-box .mb-2 {
+    .customer-info-box .mb-2 {
         margin-bottom: 2px !important;
         font-size: 0.75rem !important;
     }
@@ -388,31 +344,7 @@
         background-color: #f9f9f9 !important;
     }
 
-    /* Notes and Payment history in same row */
-    .notes-payment-container {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        margin-bottom: 5px !important;
-    }
-    
-    .notes-box-container,
-    .payment-history-section {
-        width: 50% !important;
-        float: left !important;
-        padding: 0 5px !important;
-    }
-    
-    /* When payment history is not shown, notes should take full width */
-    .notes-box-container:not(.print-with-payment-history) {
-        width: 100% !important;
-    }
-    
-    /* When payment history is shown, ensure notes are side by side */
-    .payment-history-section.show-in-print + .notes-box-container {
-        width: 50% !important;
-    }
-
-    .payment-history-box,
+    /* Notes */
     .notes-box {
         padding: 5px !important;
         margin-bottom: 5px !important;
@@ -421,21 +353,11 @@
         height: 100% !important;
     }
 
-    .payment-history-box h6,
     .notes-box h6 {
         font-size: 0.8rem !important;
         margin-bottom: 3px !important;
         padding-bottom: 3px !important;
         border-bottom: 1px solid #ddd !important;
-    }
-
-    .payment-history-table {
-        font-size: 0.7rem !important;
-    }
-
-    .payment-history-table th,
-    .payment-history-table td {
-        padding: 2px !important;
     }
 
     #notes {
@@ -465,21 +387,8 @@
         page-break-inside: avoid !important;
     }
 
-    /* Payment history section visibility */
-    .payment-history-section {
-        display: none !important;
-    }
-
-    .payment-history-section.show-in-print {
-        display: block !important;
-        page-break-inside: avoid !important;
-        width: 50% !important;
-        float: left !important;
-    }
-
     /* Prevent unwanted page breaks */
     .table-responsive,
-    .payment-history-box,
     .notes-box {
         page-break-inside: avoid !important;
     }
@@ -520,10 +429,10 @@
     body * {
         visibility: hidden;
     }
-    #invoiceContent, #invoiceContent * {
+    #quotationContent, #quotationContent * {
         visibility: visible;
     }
-    #invoiceContent {
+    #quotationContent {
         position: absolute;
         left: 0;
         top: 0;
@@ -556,81 +465,114 @@
 
 /* 80mm Receipt Print Styles */
 @media print and (max-width: 80mm) {
-    @page {
-        size: 80mm; /* Sets the width of the page to 80mm */
-        margin: 0; /* Removes default margins to ensure content fits */
-    }
-
     body {
-        width: 80mm; /* Ensures the body content fits within the 80mm width */
-        margin: 0; /* Removes body margin to avoid extra space */
-        padding: 0; /* Removes padding to ensure content fits */
-        font-size: 12px; /* Adjust font size for better readability on small print */
-    }
-
-    /* Adjust container elements to fit within the 80mm width */
-    .container, .container-fluid {
-        width: 100%;
-        max-width: 80mm;
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    /* Make content fit within 80mm */
-    .content {
+        width: 80mm !important;
         margin: 0 !important;
         padding: 0 !important;
-        width: 80mm !important;
     }
-
-    /* Adjust invoice wrapper for 80mm */
-    .invoice-wrapper {
+    
+    #quotationContent {
+        width: 72mm !important; /* 80mm - margins */
         padding: 2mm !important;
-        margin: 0 !important;
-        width: 76mm !important; /* 80mm - 2mm padding on each side */
     }
-
-    /* Stack elements vertically for narrow receipt */
+    
+    /* Company header for 80mm */
+    .row.border-bottom {
+        display: block !important;
+        text-align: center !important;
+    }
+    
     .col-md-6 {
         width: 100% !important;
         float: none !important;
+        text-align: center !important;
         padding: 0 !important;
+        margin-bottom: 3mm !important;
+    }
+    
+    .col-md-6.text-md-end {
+        text-align: center !important;
+    }
+    
+    #company-logo-container {
+        display: flex !important;
+        justify-content: center !important;
         margin-bottom: 2mm !important;
     }
-
-    /* Adjust table for 80mm width */
-    .table {
-        font-size: 10px !important;
+    
+    #company-logo {
+        max-height: 30px !important;
+        max-width: 60px !important;
+    }
+    
+    .company-name {
+        font-size: 0.9rem !important;
+        margin-bottom: 1mm !important;
+    }
+    
+    .company-details-compact {
+        font-size: 0.6rem !important;
+        line-height: 1 !important;
+    }
+    
+    .quotation-title {
+        font-size: 1rem !important;
+        margin: 1mm 0 !important;
+    }
+    
+    .quotation-number-wrapper,
+    .quotation-date-wrapper,
+    .quotation-validity-wrapper,
+    .quotation-status-wrapper {
+        font-size: 0.7rem !important;
+        margin-bottom: 1mm !important;
+    }
+    
+    /* Customer section for 80mm */
+    .customer-section .col-md-6 {
         width: 100% !important;
         margin-bottom: 2mm !important;
     }
-
-    /* Hide some columns to fit in narrow width */
+    
+    /* Table for 80mm */
+    .table {
+        font-size: 0.6rem !important;
+        width: 100% !important;
+    }
+    
+    .table th {
+        padding: 1mm !important;
+        font-size: 0.6rem !important;
+    }
+    
+    .table td {
+        padding: 1mm !important;
+        font-size: 0.6rem !important;
+    }
+    
+    /* Hide some columns in 80mm mode */
     .table th:nth-child(4),
     .table td:nth-child(4) {
         display: none !important;
     }
-
+    
     /* Adjust column widths for 80mm */
     .table th:nth-child(1) { width: 50% !important; }
     .table th:nth-child(2) { width: 15% !important; }
     .table th:nth-child(3) { width: 15% !important; }
     .table th:nth-child(5) { width: 20% !important; }
-
-    /* Reduce font sizes */
-    h1, h2, h3, h4, h5, h6 {
-        font-size: 14px !important;
-        margin: 1mm 0 !important;
+    
+    /* Adjust font sizes for 80mm */
+    h6 {
+        font-size: 0.7rem !important;
     }
-
-    p, span, div {
-        font-size: 10px !important;
+    
+    #notes {
+        font-size: 0.6rem !important;
     }
-
-    /* Adjust company logo size */
-    #company-logo {
-        max-height: 20mm !important;
-        max-width: 30mm !important;
+    
+    tfoot tr td {
+        font-size: 0.65rem !important;
     }
 }
 
@@ -644,55 +586,17 @@
     width: 20px;
     display: inline-block;
 }
-
-.payment-history-table {
-    font-size: 0.875rem;
-    margin-bottom: 0;
-}
-
-.payment-history-table th {
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.payment-history-table td {
-    vertical-align: middle;
-}
-
-.payment-history-box {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.125);
-    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
-}
-
-/* Notes and Payment History Layout */
-.notes-payment-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.notes-box-container,
-.payment-history-section {
-    margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-    .notes-box-container,
-    .payment-history-section {
-        padding: 0 0.5rem;
-    }
-}
 </style>
 
 <script>
 $(document).ready(function() {
-    // Get sale ID from URL
+    // Get quotation ID from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const saleId = urlParams.get('id');
+    const quotationId = urlParams.get('id');
 
-    if (!saleId) {
-        alert('Invalid sale ID');
-        window.location.href = 'sales.php';
+    if (!quotationId) {
+        alert('Invalid quotation ID');
+        window.location.href = 'quotations.php';
         return;
     }
 
@@ -716,41 +620,48 @@ $(document).ready(function() {
         }
     });
 
-    // Load sale details
+    // Load quotation details
     $.ajax({
-        url: 'sale_actions.php',
+        url: 'quotation_actions.php',
         type: 'GET',
         data: {
-            action: 'get_sale',
-            id: saleId
+            action: 'get_quotation',
+            id: quotationId
         },
         success: function(response) {
             if (response.status === 'success' && response.data) {
-                const sale = response.data;
+                const quotation = response.data;
                 
-                // Fill invoice details
-                $('#invoiceNumber').text(sale.invoice_number);
-                $('#createdDate').text(moment(sale.created_at).format('DD-MM-YYYY'));
-                $('#customerName').text(sale.customer_name);
-                $('#customerPhone').text(sale.customer_phone || 'N/A');
-                $('#customerAddress').text(sale.customer_address || 'N/A');
-                $('#paymentMethod').text(sale.payment_method.replace('_', ' ').toUpperCase());
+                // Fill quotation details
+                $('#quotationNumber').text(quotation.quotation_number);
+                $('#createdDate').text(moment(quotation.created_at).format('DD-MM-YYYY'));
                 
-                // Payment status badge
+                // Calculate and display validity date
+                const quotationDate = moment(quotation.quotation_date);
+                const validUntilDate = moment(quotationDate).add(quotation.validity_period, 'days');
+                $('#validUntil').text(validUntilDate.format('DD-MM-YYYY'));
+                
+                // Customer details
+                $('#customerName').text(quotation.customer_name);
+                $('#customerPhone').text(quotation.customer_phone || 'N/A');
+                $('#customerAddress').text(quotation.customer_address || 'N/A');
+                
+                // Status badge
                 const badges = {
-                    'paid': 'success',
-                    'partially_paid': 'warning',
-                    'pending': 'danger'
+                    'pending': 'warning',
+                    'approved': 'success',
+                    'rejected': 'danger',
+                    'converted': 'info'
                 };
-                $('#paymentStatus').html(
-                    `<span class="badge bg-${badges[sale.payment_status]}">
-                        ${sale.payment_status.replace('_', ' ').toUpperCase()}
+                $('#quotationStatus').html(
+                    `<span class="badge bg-${badges[quotation.status]}">
+                        ${quotation.status.toUpperCase()}
                     </span>`
                 );
 
                 // Fill items table
                 let itemsHtml = '';
-                sale.items.forEach(function(item) {
+                quotation.items.forEach(function(item) {
                     itemsHtml += `
                         <tr>
                             <td>${item.product_name}</td>
@@ -764,49 +675,26 @@ $(document).ready(function() {
                 $('#itemsTableBody').html(itemsHtml);
 
                 // Fill totals
-                $('#subTotal').text(parseFloat(sale.total_amount).toFixed(2));
-                $('#tax').text(parseFloat(sale.tax).toFixed(2));
-                $('#finalAmount').text(parseFloat(sale.final_amount).toFixed(2));
-
-                // Fill payments table and calculate totals
-                let paymentsHtml = '';
-                let totalPaid = 0;
-                if (sale.payments && sale.payments.length > 0) {
-                    sale.payments.forEach(function(payment) {
-                        totalPaid += parseFloat(payment.amount);
-                        paymentsHtml += `
-                            <tr>
-                                <td>${moment(payment.payment_date).format('DD-MM-YYYY')}</td>
-                                <td class="text-end">${parseFloat(payment.amount).toFixed(2)}</td>
-                                <td>${payment.payment_method.replace('_', ' ').toUpperCase()}</td>
-                                <td>${payment.transaction_id || '-'}</td>
-                                <td class="text-muted">${payment.notes || '-'}</td>
-                            </tr>
-                        `;
-                    });
-                    $('#totalPayments').text(sale.payments.length);
-                    $('#totalPaidAmount').text(totalPaid.toFixed(2));
-                    const balance = parseFloat(sale.final_amount) - totalPaid;
-                    $('#balanceAmount').text(balance.toFixed(2));
-                } else {
-                    paymentsHtml = '<tr><td colspan="5" class="text-center text-muted">No payment records found</td></tr>';
-                    $('#totalPayments').text('0');
-                    $('#totalPaidAmount').text('0.00');
-                    $('#balanceAmount').text(parseFloat(sale.final_amount).toFixed(2));
-                }
-                $('#paymentsTableBody').html(paymentsHtml);
+                $('#subTotal').text(parseFloat(quotation.total_amount).toFixed(2));
+                $('#tax').text(parseFloat(quotation.tax).toFixed(2));
+                $('#finalAmount').text(parseFloat(quotation.final_amount).toFixed(2));
 
                 // Fill notes
-                $('#notes').text(sale.notes || 'No notes available');
+                $('#notes').text(quotation.notes || 'No notes available');
+                
+                // Disable convert button if already converted
+                if (quotation.status === 'converted') {
+                    $('#convertToSale').prop('disabled', true).attr('title', 'This quotation has already been converted to a sale');
+                }
             } else {
-                alert('Failed to load invoice details');
-                window.location.href = 'sales.php';
+                alert('Failed to load quotation details');
+                window.location.href = 'quotations.php';
             }
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
-            alert('Failed to load invoice details');
-            window.location.href = 'sales.php';
+            alert('Failed to load quotation details');
+            window.location.href = 'quotations.php';
         }
     });
 
@@ -819,24 +707,8 @@ $(document).ready(function() {
         }
     });
 
-    // Toggle payment history
-    $('#showPaymentHistory').change(function() {
-        if ($(this).is(':checked')) {
-            $('.payment-history-section').show().addClass('show-in-print');
-        } else {
-            $('.payment-history-section').hide().removeClass('show-in-print');
-        }
-    });
-
-    // Print invoice - A4 format
-    $('#printInvoiceA4').click(function() {
-        // For print preview, ensure notes are visible alongside payment history
-        if ($('#showPaymentHistory').is(':checked')) {
-            $('.notes-box-container').addClass('print-with-payment-history');
-        } else {
-            $('.notes-box-container').removeClass('print-with-payment-history');
-        }
-        
+    // Print quotation - A4 format
+    $('#printQuotationA4').click(function() {
         // Ensure customer details are properly displayed
         if ($('#showCustomerDetails').is(':checked')) {
             $('.customer-section').addClass('show-in-print');
@@ -848,17 +720,8 @@ $(document).ready(function() {
         window.print();
     });
     
-    // Print invoice - 80mm receipt format
-    $('#printInvoice80mm').click(function() {
-        // Only show payment history in 80mm mode if checkbox is checked
-        if ($('#showPaymentHistory').is(':checked')) {
-            $('.payment-history-section').show().addClass('show-in-print');
-            $('.notes-box-container').addClass('print-with-payment-history');
-        } else {
-            $('.payment-history-section').hide().removeClass('show-in-print');
-            $('.notes-box-container').removeClass('print-with-payment-history');
-        }
-        
+    // Print quotation - 80mm receipt format
+    $('#printQuotation80mm').click(function() {
         // Only show customer details in 80mm mode if checkbox is checked
         if ($('#showCustomerDetails').is(':checked')) {
             $('.customer-section').show().addClass('show-in-print');
@@ -874,14 +737,7 @@ $(document).ready(function() {
         // Reset after printing
         $('body').removeClass('print-80mm');
         
-        // Reset visibility based on checkboxes (in case they were changed during print preview)
-        if (!$('#showPaymentHistory').is(':checked')) {
-            $('.payment-history-section').hide().removeClass('show-in-print');
-            $('.notes-box-container').removeClass('print-with-payment-history');
-        } else {
-            $('.payment-history-section').show().addClass('show-in-print');
-        }
-        
+        // Reset visibility based on checkboxes
         if (!$('#showCustomerDetails').is(':checked')) {
             $('.customer-section').hide().removeClass('show-in-print');
         } else {
@@ -889,35 +745,66 @@ $(document).ready(function() {
         }
     });
 
-    // Edit invoice
-    $('#editInvoice').click(function() {
-        window.location.href = `edit_invoice.php?id=${saleId}`;
-    });
-
-    // Delete invoice
-    $('#deleteInvoice').click(function() {
-        if (confirm('Are you sure you want to delete this invoice? This action cannot be undone.')) {
+    // Convert to sale
+    $('#convertToSale').click(function() {
+        if (confirm('Are you sure you want to convert this quotation to a sale? This action cannot be undone.')) {
             $.ajax({
-                url: 'sale_actions.php',
+                url: 'quotation_actions.php',
                 type: 'POST',
                 data: {
-                    action: 'delete_sale',
-                    sale_id: saleId
+                    action: 'convert_to_sale',
+                    quotation_id: quotationId
                 },
                 success: function(response) {
                     if (response.status === 'success') {
-                        alert('Invoice deleted successfully');
-                        window.location.href = 'sales.php';
+                        alert('Quotation converted to sale successfully');
+                        // Redirect to the newly created sale
+                        if (response.sale_id) {
+                            window.location.href = `view_invoice.php?id=${response.sale_id}`;
+                        } else {
+                            window.location.reload(); // Reload to show updated status
+                        }
                     } else {
-                        alert('Failed to delete invoice: ' + response.message);
+                        alert(response.message || 'Failed to convert quotation to sale');
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    alert('Failed to delete invoice');
+                    alert('Failed to convert quotation to sale');
+                }
+            });
+        }
+    });
+
+    // Edit quotation
+    $('#editQuotation').click(function() {
+        window.location.href = `edit_quotation.php?id=${quotationId}`;
+    });
+
+    // Delete quotation
+    $('#deleteQuotation').click(function() {
+        if (confirm('Are you sure you want to delete this quotation? This action cannot be undone.')) {
+            $.ajax({
+                url: 'quotation_actions.php',
+                type: 'POST',
+                data: {
+                    action: 'delete_quotation',
+                    quotation_id: quotationId
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert('Quotation deleted successfully');
+                        window.location.href = 'quotations.php';
+                    } else {
+                        alert('Failed to delete quotation: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Failed to delete quotation');
                 }
             });
         }
     });
 });
-</script>
+</script> 

@@ -8,7 +8,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h5 class="mb-0">Sales Management</h5>
+                <h5 class="mb-0">Quotations Management</h5>
                 <div>
                     <button id="bulkDeleteBtn" class="btn btn-danger me-2" style="display: none;">
                         <i class="bi bi-trash me-2"></i>Delete Selected
@@ -16,18 +16,18 @@
                     <button id="exportCsvBtn" class="btn btn-success me-2">
                         <i class="bi bi-file-earmark-excel me-2"></i>Export CSV
                     </button>
-                    <button id="printSalesBtn" class="btn btn-secondary me-2">
+                    <button id="printQuotationsBtn" class="btn btn-secondary me-2">
                         <i class="bi bi-printer me-2"></i>Print
                     </button>
-                    <button id="addSaleBtn" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-2"></i>New Sale
+                    <button id="addQuotationBtn" class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-2"></i>New Quotation
                     </button>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search Invoice...">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search Quotation...">
                 </div>
                 <div class="col-md-3">
                     <select id="customerFilter" class="form-control">
@@ -46,19 +46,19 @@
             </div>
 
             <div class="table-responsive">
-                <table id="salesTable" class="table table-striped table-hover">
+                <table id="quotationsTable" class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>
                                 <input type="checkbox" id="selectAll" class="form-check-input">
                             </th>
                             <th>Sr. No.</th>
-                            <th>Invoice #</th>
+                            <th>Quotation #</th>
                             <th>Customer</th>
                             <th>Date</th>
                             <th>Total Amount</th>
-                            <th>Remaining Balance</th>
-                            <th>Payment Status</th>
+                            <th>Status</th>
+                            <th>Validity</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -67,16 +67,16 @@
         </div>
     </div>
 
-    <!-- Add Sale Modal -->
-    <div class="modal fade" id="saleModal" tabindex="-1">
+    <!-- Add Quotation Modal -->
+    <div class="modal fade" id="quotationModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">New Sale</h5>
+                    <h5 class="modal-title">New Quotation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="saleForm">
+                    <form id="quotationForm">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Customer</label>
@@ -85,8 +85,8 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Sale Date</label>
-                                <input type="text" name="sale_date" class="form-control flatpickr" required>
+                                <label class="form-label">Quotation Date</label>
+                                <input type="text" name="quotation_date" class="form-control flatpickr" required>
                             </div>
                         </div>
 
@@ -146,16 +146,16 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Payment Method</label>
-                                <select class="form-control" name="payment_method" required>
-                                    <option value="cash">Cash</option>
-                                    <option value="card">Card</option>
-                                    <option value="bank_transfer">Bank Transfer</option>
+                                <label class="form-label">Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Payment Amount</label>
-                                <input type="number" class="form-control" name="payment_amount">
+                                <label class="form-label">Validity Period (Days)</label>
+                                <input type="number" class="form-control" name="validity_period" value="30" min="1">
                             </div>
                         </div>
 
@@ -165,7 +165,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save me-2"></i>Save Sale
+                            <i class="bi bi-save me-2"></i>Save Quotation
                         </button>
                     </form>
                 </div>
@@ -262,7 +262,7 @@ $(document).ready(function() {
     function loadInitialData() {
         // Load customers
         $.ajax({
-            url: 'sale_actions.php',
+            url: 'quotation_actions.php',
             type: 'GET',
             data: { action: 'get_customers' },
             success: function(response) {
@@ -294,7 +294,7 @@ $(document).ready(function() {
 
         // Load products
         $.ajax({
-            url: 'sale_actions.php',
+            url: 'quotation_actions.php',
             type: 'GET',
             data: { action: 'get_products' },
             success: function(response) {
@@ -354,9 +354,9 @@ $(document).ready(function() {
     });
 
     // Show modal and load data
-    $('#addSaleBtn').click(function() {
+    $('#addQuotationBtn').click(function() {
         // Reset the form first
-        $('#saleForm')[0].reset();
+        $('#quotationForm')[0].reset();
         // Clear all product rows except the first one
         let firstRow = $('#productsList .product-row').first();
         $('#productsList .product-row').not(':first').remove();
@@ -368,7 +368,7 @@ $(document).ready(function() {
         // Load fresh data
         loadInitialData();
         // Show modal
-        $('#saleModal').modal('show');
+        $('#quotationModal').modal('show');
     });
 
     // Helper function to get items data
@@ -390,15 +390,15 @@ $(document).ready(function() {
     }
 
     // Handle form submission
-    $('#saleForm').on('submit', function(e) {
+    $('#quotationForm').on('submit', function(e) {
         e.preventDefault();
         
         let formData = new FormData(this);
-        formData.append('action', 'create_sale');
+        formData.append('action', 'create_quotation');
         formData.append('items', JSON.stringify(getItemsData()));
         
         $.ajax({
-            url: 'sale_actions.php',
+            url: 'quotation_actions.php',
             type: 'POST',
             data: formData,
             processData: false,
@@ -406,18 +406,18 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status === 'success') {
                     // Close the modal
-                    $('#saleModal').modal('hide');
+                    $('#quotationModal').modal('hide');
                     
                     // Reset the form
-                    $('#saleForm')[0].reset();
+                    $('#quotationForm')[0].reset();
                     
                     // Refresh the table data
-                    salesTable.ajax.reload();
+                    quotationsTable.ajax.reload();
                     
                     // Show success message
-                    showAlert('success', 'Sale saved successfully');
+                    showAlert('success', 'Quotation saved successfully');
                 } else {
-                    showAlert('error', response.message || 'Failed to save sale');
+                    showAlert('error', response.message || 'Failed to save quotation');
                 }
             },
             error: handleAjaxError
@@ -430,66 +430,66 @@ $(document).ready(function() {
     });
 
     // Bulk delete functionality
-    let selectedSales = new Set();
+    let selectedQuotations = new Set();
     
     // Handle select all checkbox
     $('#selectAll').change(function() {
         let isChecked = $(this).prop('checked');
-        $('.sale-checkbox').prop('checked', isChecked);
+        $('.quotation-checkbox').prop('checked', isChecked);
         if (isChecked) {
-            $('.sale-checkbox').each(function() {
-                selectedSales.add($(this).val());
+            $('.quotation-checkbox').each(function() {
+                selectedQuotations.add($(this).val());
             });
         } else {
-            selectedSales.clear();
+            selectedQuotations.clear();
         }
         updateBulkDeleteButton();
     });
     
     // Handle individual checkboxes
-    $(document).on('change', '.sale-checkbox', function() {
-        let saleId = $(this).val();
+    $(document).on('change', '.quotation-checkbox', function() {
+        let quotationId = $(this).val();
         if ($(this).prop('checked')) {
-            selectedSales.add(saleId);
+            selectedQuotations.add(quotationId);
         } else {
-            selectedSales.delete(saleId);
+            selectedQuotations.delete(quotationId);
             $('#selectAll').prop('checked', false);
         }
         updateBulkDeleteButton();
     });
     
     function updateBulkDeleteButton() {
-        $('#bulkDeleteBtn').toggle(selectedSales.size > 0);
+        $('#bulkDeleteBtn').toggle(selectedQuotations.size > 0);
     }
     
     // Bulk delete action
     $('#bulkDeleteBtn').click(function() {
-        if (selectedSales.size === 0) return;
+        if (selectedQuotations.size === 0) return;
         
-        if (confirm('Are you sure you want to delete the selected sales? This action cannot be undone.')) {
+        if (confirm('Are you sure you want to delete the selected quotations? This action cannot be undone.')) {
             $.ajax({
-                url: 'sale_actions.php',
+                url: 'quotation_actions.php',
                 type: 'POST',
                 data: {
                     action: 'bulk_delete',
-                    sale_ids: Array.from(selectedSales)
+                    quotation_ids: Array.from(selectedQuotations)
                 },
                 success: function(response) {
                     if (response.status === 'success') {
                         // Clear selections first
-                        selectedSales.clear();
+                        selectedQuotations.clear();
                         $('#selectAll').prop('checked', false);
                         updateBulkDeleteButton();
                         
                         // Reload the DataTable
-                        $('#salesTable').DataTable().ajax.reload(null, false);
+                        $('#quotationsTable').DataTable().ajax.reload(null, false);
                         
                         // Show success message after a short delay to ensure table is refreshed
                         setTimeout(function() {
-                            showAlert('success', 'Selected sales have been deleted successfully.');
+                            showAlert('success', 'Selected quotations have been deleted successfully.');
                         }, 100);
                     } else {
-                        showAlert('error', response.message || 'Failed to delete selected sales.');
+                        showAlert('error', response.message || 'Failed to delete selected quotations.');
                     }
                 },
                 error: handleAjaxError
@@ -498,15 +498,16 @@ $(document).ready(function() {
     });
 
     // Initialize DataTable
-    let salesTable = $('#salesTable').DataTable({
-        serverSide: true,
+    let quotationsTable = $('#quotationsTable').DataTable({
         processing: true,
+        serverSide: false, // We'll handle server-side processing manually
         ajax: {
-            url: 'sale_actions.php?action=fetch',
+            url: 'quotation_actions.php',
             type: 'GET',
             data: function(d) {
                 return {
-                    ...d,
+                    action: 'fetch',
+                    draw: d.draw,
                     search: $('#searchInput').val(),
                     customer_id: $('#customerFilter').val(),
                     start_date: $('#startDate').val(),
@@ -515,11 +516,11 @@ $(document).ready(function() {
             }
         },
         columns: [
-            {
-                data: 'id',
+            { 
+                data: 'quotation_id',
                 orderable: false,
                 render: function(data) {
-                    return `<input type="checkbox" class="form-check-input sale-checkbox" value="${data}">`;
+                    return `<input type="checkbox" class="form-check-input quotation-checkbox" value="${data}">`;
                 }
             },
             { 
@@ -528,53 +529,59 @@ $(document).ready(function() {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
-            { data: 'invoice_number' },
+            { data: 'quotation_number' },
             { data: 'customer_name' },
             { 
-                data: 'sale_date',
+                data: 'quotation_date',
                 render: function(data) {
-                    return moment(data).format('DD-MM-YYYY');
+                    return data ? new Date(data).toLocaleDateString() : '';
                 }
             },
             { 
                 data: 'final_amount',
                 render: function(data) {
-                    return parseFloat(data).toFixed(2);
+                    return parseFloat(data).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
                 }
             },
             { 
-                data: 'remaining_balance',
+                data: 'status',
                 render: function(data) {
-                    if (parseFloat(data) <= 0) {
-                        return '<span class="text-success">0.00</span>';
-                    } else {
-                        return '<span class="text-danger">' + parseFloat(data).toFixed(2) + '</span>';
-                    }
+                    let badgeClass = 'bg-warning';
+                    if (data === 'approved') badgeClass = 'bg-success';
+                    if (data === 'rejected') badgeClass = 'bg-danger';
+                    if (data === 'converted') badgeClass = 'bg-info';
+                    return `<span class="badge ${badgeClass}">${data}</span>`;
                 }
             },
             { 
-                data: 'payment_status',
-                render: function(data) {
-                    let badges = {
-                        'paid': 'success',
-                        'partially_paid': 'warning',
-                        'pending': 'danger'
-                    };
-                    return `<span class="badge bg-${badges[data]}">${data.replace('_', ' ').toUpperCase()}</span>`;
+                data: 'validity_period',
+                render: function(data, type, row) {
+                    const quotationDate = new Date(row.quotation_date);
+                    const validUntil = new Date(quotationDate);
+                    validUntil.setDate(validUntil.getDate() + parseInt(data));
+                    return `${data} days (until ${validUntil.toLocaleDateString()})`;
                 }
             },
             {
                 data: null,
-                render: function(data) {
+                orderable: false,
+                render: function(data, type, row) {
                     return `
                         <div class="btn-group">
-                            <button class="btn btn-sm btn-info view-invoice" data-id="${data.id || data.sale_id}">
+                            <button type="button" class="btn btn-sm btn-primary view-btn" data-id="${row.quotation_id}">
                                 <i class="bi bi-eye"></i>
                             </button>
-                            <button class="btn btn-sm btn-primary edit-invoice" data-id="${data.id || data.sale_id}">
+                            <button type="button" class="btn btn-sm btn-info edit-btn" data-id="${row.quotation_id}">
                                 <i class="bi bi-pencil"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger delete-invoice" data-id="${data.id || data.sale_id}">
+                            <button type="button" class="btn btn-sm btn-success convert-btn" data-id="${row.quotation_id}" 
+                                ${row.status === 'converted' ? 'disabled' : ''}>
+                                <i class="bi bi-arrow-right-circle"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="${row.quotation_id}">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </div>
@@ -582,189 +589,229 @@ $(document).ready(function() {
                 }
             }
         ],
-        order: [[3, 'desc']]
+        order: [[3, 'desc']], // Sort by date descending
+        pageLength: 10,
+        dom: 'rtip', // Hide default search box
+        language: {
+            emptyTable: "No quotations found",
+            zeroRecords: "No matching quotations found"
+        }
     });
 
-    // Filter handling
-    let filterTimeout;
-    function applyFilters() {
-        clearTimeout(filterTimeout);
-        filterTimeout = setTimeout(() => {
-            salesTable.ajax.reload();
-        }, 500);
-    }
+    // Search input
+    $('#searchInput').on('keyup', function() {
+        quotationsTable.ajax.reload();
+    });
 
-    $('#searchInput, #customerFilter, #startDate, #endDate').on('change', applyFilters);
-    $('#searchInput').on('keyup', applyFilters);
+    // Customer filter
+    $('#customerFilter').on('change', function() {
+        quotationsTable.ajax.reload();
+    });
+
+    // Date filters
+    $('#startDate, #endDate').on('change', function() {
+        quotationsTable.ajax.reload();
+    });
 
     // Clear filters
     $('#clearFilters').click(function() {
         $('#searchInput').val('');
         $('#customerFilter').val('').trigger('change');
         $('#startDate, #endDate').val('');
-        applyFilters();
+        quotationsTable.ajax.reload();
     });
 
-    // Function to calculate totals
-    function calculateTotals() {
-        let subTotal = 0;
-        $('.product-row').each(function() {
-            let total = parseFloat($(this).find('.total').val()) || 0;
-            subTotal += total;
-        });
-        
-        let tax = parseFloat($('input[name="tax"]').val()) || 0;
-        let taxAmount = (subTotal * tax) / 100;
-        let finalAmount = subTotal + taxAmount;
-        
-        // Update all relevant fields
-        $('input[name="total_amount"]').val(subTotal.toFixed(2));
-        $('input[name="final_amount"]').val(finalAmount.toFixed(2));
-        
-        // Display tax amount for better visibility
-        if ($('#taxAmount').length === 0) {
-            $('input[name="tax"]').parent().append('<div id="taxAmount" class="text-muted small mt-1"></div>');
-        }
-        $('#taxAmount').text(`Tax Amount: ${taxAmount.toFixed(2)}`);
-    }
-
-    // Ensure tax is calculated on form load
-    $('#saleModal').on('shown.bs.modal', function() {
-        calculateTotals();
-    });
-
-    // Handle tax input change with validation
-    $('input[name="tax"]').on('input', function() {
-        let tax = parseFloat($(this).val()) || 0;
-        // Ensure tax is not negative and not too high
-        if (tax < 0) {
-            $(this).val(0);
-            tax = 0;
-        } else if (tax > 100) {
-            $(this).val(100);
-            tax = 100;
-        }
-        calculateTotals();
-    });
-
-    // Handle product row changes
-    $(document).on('input', '.quantity, .price, .discount', function() {
-        let row = $(this).closest('.product-row');
-        let quantity = parseFloat(row.find('.quantity').val()) || 0;
-        let price = parseFloat(row.find('.price').val()) || 0;
-        let discount = parseFloat(row.find('.discount').val()) || 0;
-        
-        let total = (quantity * price) - discount;
-        row.find('.total').val(total.toFixed(2));
-        
-        calculateTotals();
-    });
-
-    // Calculate Row Total
-    function calculateRowTotal(row) {
-        let price = parseFloat(row.find('.price').val()) || 0;
-        let quantity = parseFloat(row.find('.quantity').val()) || 0;
-        let discount = parseFloat(row.find('.discount').val()) || 0;
-        let total = (price * quantity) - discount;
-        row.find('.total').val(total.toFixed(2));
-        calculateTotals();
-    }
-
-    // View Invoice
-    $(document).on('click', '.view-invoice', function() {
-        let saleId = $(this).data('id');
-        window.location.href = `view_invoice.php?id=${saleId}`;
-    });
-
-    // Edit Invoice
-    $(document).on('click', '.edit-invoice', function() {
-        let saleId = $(this).data('id');
-        window.location.href = `edit_invoice.php?id=${saleId}`;
-    });
-
-    // Delete Invoice
-    $(document).on('click', '.delete-invoice', function() {
-        let saleId = $(this).data('id');
-        if(confirm('Are you sure you want to delete this invoice? This action cannot be undone.')) {
-            $.ajax({
-                url: 'sale_actions.php',
-                type: 'POST',
-                data: {
-                    action: 'delete_sale',
-                    sale_id: saleId
-                },
-                success: function(response) {
-                    if(response.status === 'success') {
-                        salesTable.ajax.reload();
-                        alert('Invoice deleted successfully!');
-                    } else {
-                        alert('Error: ' + response.message || 'Failed to delete invoice');
-                    }
-                },
-                error: function() {
-                    alert('Failed to delete invoice');
-                }
-            });
-        }
-    });
-
-    // Print functionality
-    $('#printSalesBtn').click(function() {
-        // Add print header
-        let printHeader = $('<div class="print-header">')
-            .append('<h2>Sales Report</h2>')
-            .append('<p>Generated: ' + moment().format('DD-MM-YYYY HH:mm:ss') + '</p>');
-        
-        // Add filters info if any are active
-        let activeFilters = [];
-        if ($('#searchInput').val()) activeFilters.push('Search: ' + $('#searchInput').val());
-        if ($('#customerFilter').val()) activeFilters.push('Customer: ' + $('#customerFilter option:selected').text());
-        if ($('#startDate').val()) activeFilters.push('From: ' + $('#startDate').val());
-        if ($('#endDate').val()) activeFilters.push('To: ' + $('#endDate').val());
-        
-        if (activeFilters.length > 0) {
-            printHeader.append('<p>Filters: ' + activeFilters.join(' | ') + '</p>');
-        }
-        
-        // Insert header before table
-        printHeader.insertBefore('#salesTable');
-        
-        // Print
-        window.print();
-        
-        // Remove print header after printing
-        $('.print-header').remove();
-    });
-
-    // Export CSV functionality
+    // Export CSV
     $('#exportCsvBtn').click(function() {
-        // Get current filter values
-        const filters = {
+        let filters = {
             search: $('#searchInput').val(),
             customer_id: $('#customerFilter').val(),
             start_date: $('#startDate').val(),
             end_date: $('#endDate').val()
         };
-
-        // Create form and submit it
-        const form = $('<form>')
-            .attr('method', 'POST')
-            .attr('action', 'sale_actions.php')
-            .append($('<input>')
-                .attr('type', 'hidden')
-                .attr('name', 'action')
-                .attr('value', 'export_csv'))
-            .append($('<input>')
-                .attr('type', 'hidden')
-                .attr('name', 'filters')
-                .attr('value', JSON.stringify(filters)));
-
-        $('body').append(form);
-        form.submit();
-        form.remove();
+        
+        window.location.href = `quotation_actions.php?action=export_csv&filters=${JSON.stringify(filters)}`;
     });
 
-    // Initial Load
+    // Print functionality
+    $('#printQuotationsBtn').click(function() {
+        // Add print header
+        let companyName = $('title').text() || 'Company Name';
+        let printHeader = `
+            <div class="print-header">
+                <h2>${companyName}</h2>
+                <h3>Quotations Report</h3>
+                <p>Generated on: ${new Date().toLocaleString()}</p>
+            </div>
+        `;
+        
+        // Temporarily add the header
+        $('.bg-light').prepend(printHeader);
+        
+        // Print
+        window.print();
+        
+        // Remove the header after printing
+        setTimeout(function() {
+            $('.print-header').remove();
+        }, 100);
+    });
+
+    // View quotation
+    $(document).on('click', '.view-btn', function() {
+        let quotationId = $(this).data('id');
+        window.location.href = `view_quotation.php?id=${quotationId}`;
+    });
+
+    // Edit quotation
+    $(document).on('click', '.edit-btn', function() {
+        let quotationId = $(this).data('id');
+        window.location.href = `edit_quotation.php?id=${quotationId}`;
+    });
+
+    // Convert quotation to sale
+    $(document).on('click', '.convert-btn', function() {
+        let quotationId = $(this).data('id');
+        
+        if (confirm('Are you sure you want to convert this quotation to a sale?')) {
+            $.ajax({
+                url: 'quotation_actions.php',
+                type: 'POST',
+                data: {
+                    action: 'convert_to_sale',
+                    quotation_id: quotationId
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        quotationsTable.ajax.reload();
+                        showAlert('success', 'Quotation converted to sale successfully');
+                    } else {
+                        showAlert('error', response.message || 'Failed to convert quotation');
+                    }
+                },
+                error: handleAjaxError
+            });
+        }
+    });
+
+    // Delete quotation
+    $(document).on('click', '.delete-btn', function() {
+        let quotationId = $(this).data('id');
+        
+        if (confirm('Are you sure you want to delete this quotation? This action cannot be undone.')) {
+            $.ajax({
+                url: 'quotation_actions.php',
+                type: 'POST',
+                data: {
+                    action: 'delete_quotation',
+                    quotation_id: quotationId
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        quotationsTable.ajax.reload();
+                        showAlert('success', 'Quotation deleted successfully');
+                    } else {
+                        showAlert('error', response.message || 'Failed to delete quotation');
+                    }
+                },
+                error: handleAjaxError
+            });
+        }
+    });
+
+    // Calculate row total
+    function calculateRowTotal(row) {
+        let quantity = parseFloat(row.find('.quantity').val()) || 0;
+        let price = parseFloat(row.find('.price').val()) || 0;
+        let discount = parseFloat(row.find('.discount').val()) || 0;
+        
+        let total = quantity * price - discount;
+        row.find('.total').val(total.toFixed(2));
+        
+        calculateTotals();
+    }
+
+    // Calculate totals
+    function calculateTotals() {
+        let subTotal = 0;
+        $('.total').each(function() {
+            subTotal += parseFloat($(this).val()) || 0;
+        });
+        
+        $('input[name="total_amount"]').val(subTotal.toFixed(2));
+        
+        let taxRate = parseFloat($('input[name="tax"]').val()) || 0;
+        let taxAmount = subTotal * (taxRate / 100);
+        $('#taxAmount').text(`Tax amount: ${taxAmount.toFixed(2)}`);
+        
+        let finalAmount = subTotal + taxAmount;
+        $('input[name="final_amount"]').val(finalAmount.toFixed(2));
+    }
+
+    // Handle quantity, price, discount changes
+    $(document).on('input', '.quantity, .price, .discount', function() {
+        calculateRowTotal($(this).closest('.product-row'));
+    });
+
+    // Handle tax change
+    $(document).on('input', 'input[name="tax"]', function() {
+        calculateTotals();
+    });
+
+    // Reset price button
+    $(document).on('click', '.reset-price', function() {
+        let row = $(this).closest('.product-row');
+        let selectedOption = row.find('.product-select option:selected');
+        let originalPrice = selectedOption.data('price') || 0;
+        
+        row.find('.price').val(originalPrice);
+        calculateRowTotal(row);
+    });
+
+    // Delete row button
+    $(document).on('click', '.deleteRowBtn', function() {
+        // Don't delete if it's the only row
+        if ($('.product-row').length > 1) {
+            $(this).closest('.product-row').remove();
+            calculateTotals();
+        } else {
+            // Just clear the values
+            let row = $(this).closest('.product-row');
+            row.find('input').val('');
+            row.find('select').val('');
+            calculateTotals();
+        }
+    });
+
+    // Show alert function
+    function showAlert(type, message) {
+        if (type === 'success') {
+            // Use JavaScript's default alert for success messages
+            alert(message);
+        } else {
+            // Use Bootstrap alerts for error messages
+            let alertClass = 'alert-danger';
+            let alert = `
+                <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            
+            // Remove any existing alerts
+            $('.alert').remove();
+            
+            // Add the new alert at the top of the content
+            $('.content').prepend(alert);
+            
+            // Auto dismiss after 5 seconds
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 5000);
+        }
+    }
+
+    // Load initial data
     loadInitialData();
 });
-</script>
+</script> 

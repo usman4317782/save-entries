@@ -50,7 +50,8 @@
                     <i class="fa fa-shopping-cart me-2"></i>Sales
                 </a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="sales.php" class="dropdown-item">All Sales</a>
+                    <a href="sales.php" class="dropdown-item">New</a>
+                    <a href="quotations.php" class="dropdown-item">Quotations</a>
                     <!-- <a href="sales.php?status=pending" class="dropdown-item">Pending Sales</a>
                     <a href="sales.php?status=paid" class="dropdown-item">Completed Sales</a>
                     <a href="sales.php?status=partially_paid" class="dropdown-item">Partial Payments</a>
