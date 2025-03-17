@@ -13,6 +13,7 @@ if ($action === 'fetch_statistics') {
         'total_users' => $statistics->getTotalUsers(),
         'total_vendors' => $statistics->getTotalVendors(),
         'total_sales' => $statistics->getTotalSales(),
+        'total_quotations' => $statistics->getTotalQuotations(),
         'total_revenue' => $statistics->getTotalRevenue(),
         'products_per_brand' => $statistics->getProductsPerBrand(),
         'products_per_category' => $statistics->getProductsPerCategory(),

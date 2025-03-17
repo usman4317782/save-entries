@@ -86,6 +86,17 @@
                 </div>
             </div>
 
+            <!-- Total Quotations Card -->
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 clickable-card" data-action="quotations">
+                    <i class="fa fa-file-invoice fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Total Quotations</p>
+                        <h6 class="mb-0" id="totalQuotations">Loading...</h6>
+                    </div>
+                </div>
+            </div>
+
             <!-- Total Revenue Card -->
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 clickable-card" data-action="revenue">
@@ -208,7 +219,6 @@
                 let stats = response.data;
 
                 // Update Cards
-                // Update Cards
                 $('#totalBrands').text(stats.total_brands || 0);
                 $('#totalCategories').text(stats.total_categories || 0);
                 $('#totalProducts').text(stats.total_products || 0);
@@ -216,6 +226,7 @@
                 $('#totalVendors').text(stats.total_vendors || 0);
                 $('#totalUsers').text(stats.total_users || 0);
                 $('#totalSales').text(stats.total_sales || 0);
+                $('#totalQuotations').text(stats.total_quotations || 0);
 
                 // Ensure total_revenue is treated as a number
                 $('#totalRevenue').text('$' + (parseFloat(stats.total_revenue) || 0).toFixed(2));
@@ -301,6 +312,9 @@
                     break;
                 case 'sales':
                     pageUrl = 'sales.php';
+                    break;
+                case 'quotations':
+                    pageUrl = 'quotations.php';
                     break;
                 case 'revenue':
                     pageUrl = 'revenue.php';

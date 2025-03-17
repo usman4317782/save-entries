@@ -74,6 +74,15 @@ class AllStatistics
         return $stmt->fetch()['total'] ?? 0;
     }
 
+    // Fetch the total number of quotations
+    public function getTotalQuotations()
+    {
+        $query = "SELECT COUNT(*) as total FROM quotations";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch()['total'] ?? 0;
+    }
+
     // Fetch the total revenue from sales
     public function getTotalRevenue()
     {
