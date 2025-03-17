@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2025 at 07:41 AM
+-- Generation Time: Mar 17, 2025 at 07:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,7 +65,9 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `category_name`, `description`, `type`, `created_at`) VALUES
 (1, 'first product', ' first product added', 'stock', '2025-03-08 18:06:47'),
 (2, 'second category', 'description added', 'stock', '2025-03-08 18:14:00'),
-(3, 'hardware', 'sdfds', 'stock', '2025-03-08 18:23:44');
+(3, 'hardware', 'sdfds', 'stock', '2025-03-08 18:23:44'),
+(5, 'scrap', '', '', '2025-03-17 05:28:00'),
+(6, 'mouse', '', 'stock', '2025-03-17 05:30:10');
 
 -- --------------------------------------------------------
 
@@ -113,8 +115,9 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`customer_id`, `name`, `address`, `contact_number`, `closing_balance`, `created_at`, `updated_at`) VALUES
 (1, 'imran', 'lahore cantt', '03224487954', 0.00, '2025-03-08 18:49:59', '2025-03-08 18:49:59'),
-(2, 'qasim', 'karachi', '03225578964', 0.00, '2025-03-08 18:50:10', '2025-03-08 18:50:10'),
-(3, 'javed', 'karachi', '03255487454', 4687840.00, '2025-03-12 02:58:25', '2025-03-15 03:47:12');
+(2, 'qasim', 'karachi', '03225578964', 57011988.00, '2025-03-08 18:50:10', '2025-03-17 06:06:14'),
+(3, 'javed', 'karachi', '03255487454', 4687840.00, '2025-03-12 02:58:25', '2025-03-15 03:47:12'),
+(4, 'usman', 'lahore', '03224487854', 8130500.00, '2025-03-17 04:55:03', '2025-03-17 06:08:33');
 
 -- --------------------------------------------------------
 
@@ -133,19 +136,6 @@ CREATE TABLE `payments` (
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `sale_id`, `amount`, `payment_method`, `payment_date`, `transaction_id`, `notes`, `created_by`, `created_at`) VALUES
-(2, 31, 500000.00, 'cash', '2025-03-12 08:04:59', '', '', 1, '2025-03-12 03:04:59'),
-(3, 31, 549000.00, 'cash', '2025-03-12 08:05:35', '', '', 1, '2025-03-12 03:05:35'),
-(4, 32, 114.00, 'cash', '2025-03-13 08:02:32', '', '', 1, '2025-03-13 03:02:32'),
-(5, 32, 130.00, 'cash', '2025-03-13 08:03:03', '', '', 1, '2025-03-13 03:03:03'),
-(6, 32, 500.00, 'cash', '2025-03-13 08:17:27', '', '', 1, '2025-03-13 03:17:27'),
-(7, 32, 400.00, 'cash', '2025-03-15 08:47:23', '', '', 1, '2025-03-15 03:47:23'),
-(8, 34, 1250025.00, 'cash', '2025-03-15 11:40:22', '', '', 1, '2025-03-15 06:40:22');
 
 -- --------------------------------------------------------
 
@@ -194,7 +184,13 @@ INSERT INTO `products` (`id`, `category_id`, `brand_id`, `product_name`, `descri
 (6, 3, 3, 'socket', NULL, NULL, NULL, NULL, '2025-03-08 18:43:06', '2025-03-12 03:17:26', NULL, '34434343', 'Non Stock'),
 (10, 3, 4, 'sdfsfsfsfsdf', 'sdfdsfsfsfsd', 234234.00, 2342424242.00, 4454, '2025-03-12 03:17:12', '2025-03-12 03:20:01', 'w234234', 'bcd88', 'Stock'),
 (11, NULL, NULL, 'new product', NULL, 55.00, 55.00, 55, '2025-03-13 02:51:09', '2025-03-13 02:51:22', '4543555', '345353hgfhf', 'Stock'),
-(12, NULL, NULL, 'dffdjsjdfsdjf', NULL, NULL, NULL, NULL, '2025-03-13 08:20:42', NULL, NULL, NULL, 'Stock');
+(12, NULL, NULL, 'dffdjsjdfsdjf', NULL, NULL, NULL, NULL, '2025-03-13 08:20:42', NULL, NULL, NULL, 'Stock'),
+(13, 5, 3, 'laptop', 'new product added', 23232.00, 2323.00, 22222, '2025-03-17 05:28:12', NULL, '234343', 'usj3343', 'Stock'),
+(15, 3, 1, 'mobile cable wire', 'i have added the description', 12121.00, 1235.00, 55, '2025-03-17 05:48:26', NULL, '2123', 'sdfd12121', 'Stock'),
+(17, NULL, NULL, 'health product', NULL, 123.00, NULL, 0, '2025-03-17 06:05:48', NULL, NULL, NULL, 'Stock'),
+(18, 5, 2, 'mobile product', 'new description added', 3500.00, NULL, 12545, '2025-03-17 06:07:20', NULL, '232', '2323', 'Stock'),
+(19, 3, 2, 'product for sale', NULL, NULL, NULL, 0, '2025-03-17 06:08:16', NULL, NULL, NULL, 'Stock'),
+(20, 5, 3, 'skldfjsklfjkl', NULL, 2342342.00, NULL, 0, '2025-03-17 06:10:52', NULL, '887', 'jsdhfshfkj', 'Non Stock');
 
 -- --------------------------------------------------------
 
@@ -224,7 +220,10 @@ CREATE TABLE `quotations` (
 --
 
 INSERT INTO `quotations` (`id`, `quotation_number`, `customer_id`, `quotation_date`, `total_amount`, `discount`, `tax`, `final_amount`, `status`, `validity_period`, `notes`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'QUO-20250315-ccb37', 3, '2025-03-12 00:00:00', 282188.00, 0.00, 56.44, 282244.44, 'approved', 35, 'done', 1, '2025-03-15 04:08:10', '2025-03-15 05:57:36');
+(1, 'QUO-20250315-ccb37', 3, '2025-03-12 00:00:00', 282188.00, 0.00, 56.44, 282244.44, 'converted', 35, 'done', 1, '2025-03-15 04:08:10', '2025-03-17 05:04:06'),
+(3, 'QUO-20250317-0cb7a', 4, '2025-03-11 00:00:00', 2883022.00, 0.00, 0.00, 2883022.00, 'converted', 30, '', 1, '2025-03-17 04:56:35', '2025-03-17 04:57:15'),
+(4, 'QUO-20250317-b177c', 3, '2025-03-18 00:00:00', 0.00, 0.00, 0.00, 0.00, 'approved', 30, '', 1, '2025-03-17 05:06:54', '2025-03-17 05:08:39'),
+(5, 'QUO-20250317-b3fe9', 4, '0000-00-00 00:00:00', 0.00, 0.00, 0.00, 0.00, 'pending', 30, '', 1, '2025-03-17 06:11:10', '2025-03-17 06:11:10');
 
 -- --------------------------------------------------------
 
@@ -248,10 +247,16 @@ CREATE TABLE `quotation_items` (
 --
 
 INSERT INTO `quotation_items` (`id`, `quotation_id`, `product_id`, `quantity`, `unit_price`, `discount`, `total_price`, `created_at`) VALUES
-(9, 1, 1, 12, 23424.00, 0.00, 281088.00, '2025-03-15 05:57:36'),
-(10, 1, 11, 20, 55.00, 0.00, 1100.00, '2025-03-15 05:57:36'),
-(11, 1, 4, 0, 0.00, 0.00, 0.00, '2025-03-15 05:57:36'),
-(12, 1, 6, 0, 0.00, 0.00, 0.00, '2025-03-15 05:57:36');
+(15, 3, 1, 123, 23424.00, 0.00, 2881152.00, '2025-03-17 04:57:15'),
+(16, 3, 11, 34, 55.00, 0.00, 1870.00, '2025-03-17 04:57:15'),
+(17, 3, 4, 1, 0.00, 0.00, 0.00, '2025-03-17 04:57:15'),
+(18, 1, 1, 12, 23424.00, 0.00, 281088.00, '2025-03-17 05:04:06'),
+(19, 1, 11, 20, 55.00, 0.00, 1100.00, '2025-03-17 05:04:06'),
+(20, 1, 4, 0, 0.00, 0.00, 0.00, '2025-03-17 05:04:06'),
+(21, 1, 6, 0, 0.00, 0.00, 0.00, '2025-03-17 05:04:06'),
+(24, 4, 4, 0, 0.00, 0.00, 0.00, '2025-03-17 05:08:39'),
+(25, 4, 12, 0, 0.00, 0.00, 0.00, '2025-03-17 05:08:39'),
+(26, 5, 10, 0, 234234.00, 0.00, 0.00, '2025-03-17 06:11:10');
 
 -- --------------------------------------------------------
 
@@ -339,10 +344,7 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id`, `invoice_number`, `customer_id`, `sale_date`, `total_amount`, `discount`, `tax`, `final_amount`, `payment_status`, `payment_method`, `notes`, `created_by`, `created_at`, `updated_at`) VALUES
-(31, 'INV-20250310-8c8c7', 1, '2025-03-11 00:00:00', 538752.00, 0.00, 2.00, 549527.04, 'paid', 'cash', 'note added', 1, '2025-03-10 17:46:00', '2025-03-12 03:05:35'),
-(32, 'INV-20250313-3eedd', 3, '2025-03-11 00:00:00', 1100.00, 0.00, 4.00, 1144.00, 'paid', 'cash', '', 1, '2025-03-13 02:55:24', '2025-03-15 03:47:23'),
-(33, 'INV-20250315-46fe1', 3, '2025-03-17 00:00:00', 2640.00, 0.00, 0.00, 2640.00, 'pending', 'cash', '', 1, '2025-03-15 02:48:52', '2025-03-15 02:48:52'),
-(34, 'INV-20250315-c48cb', 3, '2025-03-11 00:00:00', 4684800.00, 0.00, 0.00, 4684800.00, 'partially_paid', 'cash', '', 1, '2025-03-15 03:47:12', '2025-03-15 06:40:22');
+(39, 'INV-20250317-12f56', 4, '0000-00-00 00:00:00', 8130500.00, 0.00, 0.00, 8130500.00, 'pending', 'cash', '', 1, '2025-03-17 06:08:33', '2025-03-17 06:08:33');
 
 -- --------------------------------------------------------
 
@@ -366,13 +368,9 @@ CREATE TABLE `sale_items` (
 --
 
 INSERT INTO `sale_items` (`id`, `sale_id`, `product_id`, `quantity`, `unit_price`, `discount`, `total_price`, `created_at`) VALUES
-(66, 31, 8, 0, 0.00, 0.00, 0.00, '2025-03-12 03:05:35'),
-(67, 31, 1, 23, 23424.00, 0.00, 538752.00, '2025-03-12 03:05:35'),
-(68, 31, 7, 0, 0.00, 0.00, 0.00, '2025-03-12 03:05:35'),
-(73, 33, 10, 12, 220.00, 0.00, 2640.00, '2025-03-15 02:48:52'),
-(76, 32, 11, 20, 55.00, 0.00, 1100.00, '2025-03-15 03:47:23'),
-(77, 34, 1, 200, 23424.00, 0.00, 4684800.00, '2025-03-15 06:40:22'),
-(78, 34, 12, 0, 0.00, 0.00, 0.00, '2025-03-15 06:40:22');
+(95, 39, 18, 2323, 3500.00, 0.00, 8130500.00, '2025-03-17 06:08:33'),
+(96, 39, 12, 0, 0.00, 0.00, 0.00, '2025-03-17 06:08:33'),
+(97, 39, 19, 0, 0.00, 0.00, 0.00, '2025-03-17 06:08:33');
 
 -- --------------------------------------------------------
 
@@ -628,7 +626,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `company_settings`
@@ -640,13 +638,13 @@ ALTER TABLE `company_settings`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -658,19 +656,19 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `quotation_items`
 --
 ALTER TABLE `quotation_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -682,13 +680,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `sale_items`
 --
 ALTER TABLE `sale_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `users`

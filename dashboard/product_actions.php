@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 $product = new Product();
 $brand = new Brand();
 $category = new Category();
-$action = $_GET['action'] ?? '';
+$action = $_GET['action'] ?? $_POST['action'] ?? '';
 
 if ($action === 'fetch') {
     $search = $_GET['search'] ?? '';
@@ -34,7 +34,94 @@ if ($action === 'fetch') {
     exit;
 }
 
+if ($action === 'get_categories_and_brands') {
+    try {
+        $categories = $category->getCategories();
+        $brands = $brand->getBrands();
+        echo json_encode([
+            "status" => "success",
+            "categories" => $categories,
+            "brands" => $brands
+        ]);
+    } catch (Exception $e) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Failed to load categories and brands: " . $e->getMessage()
+        ]);
+    }
+    exit;
+}
 
+if ($action === 'quick_add_product') {
+    $category_id = $_POST['category_id'] ?? null;
+    $brand_id = $_POST['brand_id'] ?? null;
+    $product_name = $_POST['product_name'] ?? '';
+    $description = $_POST['description'] ?? null;
+    $price = $_POST['price'] ? floatval($_POST['price']) : null;
+    $cost = $_POST['cost'] ? floatval($_POST['cost']) : null;
+    $stock_quantity = $_POST['stock_quantity'] ? intval($_POST['stock_quantity']) : 0;
+    $sku = $_POST['sku'] ?? null;
+    $unique_id = $_POST['unique_id'] ?? null;
+    $stock_status = $_POST['stock_status'] ?? 'Stock';
+
+    if (empty($product_name)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Product name is required"
+        ]);
+        exit;
+    }
+
+    if ($product->isDuplicate($category_id, $brand_id, $product_name)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Error! Duplicate entry found."
+        ]);
+        exit;
+    }
+
+    // Check if unique_id is provided and not empty
+    if (!empty($unique_id)) {
+        // Check if unique_id already exists
+        $query = "SELECT COUNT(*) as count FROM products WHERE unique_id = :unique_id";
+        $db = new Database();
+        $conn = $db->getConnection();
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':unique_id', $unique_id, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->fetch(PDO::FETCH_ASSOC)['count'] > 0) {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Error! Product Unique ID already exists."
+            ]);
+            exit;
+        }
+    }
+
+    // Create the product with all fields
+    if ($product->createProduct($category_id, $brand_id, $product_name, $description, $price, $stock_quantity, $sku, $stock_status, $cost, $unique_id)) {
+        // Get the newly created product details
+        $newProduct = $product->getLastInsertedProduct();
+        
+        // Add brand name to the response if brand exists
+        if ($brand_id) {
+            $brandInfo = $brand->getBrandById($brand_id);
+            $newProduct['brand_name'] = $brandInfo['brand_name'] ?? '';
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "Product added successfully",
+            "data" => $newProduct
+        ]);
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Failed to add product"
+        ]);
+    }
+    exit;
+}
 
 if ($action === 'fetch_single') {
     $id = $_GET['id'] ?? 0;

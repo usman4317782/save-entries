@@ -273,4 +273,17 @@ class Product
         $query = "DELETE FROM {$this->table} WHERE id IN (" . implode(',', array_map('intval', $ids)) . ")";
         return $this->conn->exec($query);
     }
+
+    // Get the last inserted product with category and brand information
+    public function getLastInsertedProduct()
+    {
+        $query = "SELECT p.*, c.category_name, b.brand_name 
+                 FROM {$this->table} p 
+                 LEFT JOIN categories c ON p.category_id = c.id 
+                 LEFT JOIN brands b ON p.brand_id = b.id 
+                 WHERE p.id = LAST_INSERT_ID()";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

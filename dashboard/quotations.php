@@ -95,9 +95,14 @@
                             <div id="productsList">
                                 <div class="row product-row mb-2 align-items-center">
                                     <div class="col-md-4">
-                                        <select class="form-control product-select" name="product_id[]" required>
-                                            <option value="">Select Product</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control product-select" name="product_id[]" required>
+                                                <option value="">Select Product</option>
+                                            </select>
+                                            <button type="button" class="btn btn-success quick-add-product" title="Quick Add Product">
+                                                <i class="bi bi-plus-circle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-md-2">
                                         <input type="number" class="form-control quantity" name="quantity[]" placeholder="Qty" required>
@@ -167,6 +172,104 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="bi bi-save me-2"></i>Save Quotation
                         </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Add Product Modal -->
+    <div class="modal fade" id="quickProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quickProductForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" name="product_name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">SKU</label>
+                                    <input type="text" class="form-control" name="sku">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Unique ID</label>
+                                    <input type="text" class="form-control" name="unique_id">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Stock Status</label>
+                                    <select class="form-control" name="stock_status">
+                                        <option value="Stock">Stock</option>
+                                        <option value="Non Stock">Non Stock</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="2"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control" name="category_id">
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Brand</label>
+                                    <select class="form-control" name="brand_id">
+                                        <option value="">Select Brand</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="price" step="0.01" min="0" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Cost</label>
+                                    <input type="number" class="form-control" name="cost" step="0.01" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Initial Stock</label>
+                                    <input type="number" class="form-control" name="stock_quantity" min="0" value="0" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -813,5 +916,94 @@ $(document).ready(function() {
 
     // Load initial data
     loadInitialData();
+
+    // Quick Add Product functionality
+    $(document).on('click', '.quick-add-product', function() {
+        let clickedButton = $(this); // Store reference to clicked button
+        
+        // Load categories and brands
+        $.ajax({
+            url: 'product_actions.php',
+            type: 'GET',
+            data: { action: 'get_categories_and_brands' },
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Populate categories
+                    let categorySelect = $('#quickProductModal select[name="category_id"]');
+                    categorySelect.empty().append('<option value="">Select Category</option>');
+                    response.categories.forEach(function(category) {
+                        categorySelect.append(`<option value="${category.id}">${category.category_name}</option>`);
+                    });
+
+                    // Populate brands
+                    let brandSelect = $('#quickProductModal select[name="brand_id"]');
+                    brandSelect.empty().append('<option value="">Select Brand</option>');
+                    response.brands.forEach(function(brand) {
+                        brandSelect.append(`<option value="${brand.id}">${brand.brand_name}</option>`);
+                    });
+
+                    // Store the clicked button reference in the modal
+                    $('#quickProductModal').data('sourceButton', clickedButton);
+                    
+                    // Show modal
+                    $('#quickProductModal').modal('show');
+                } else {
+                    showAlert('error', response.message || 'Failed to load categories and brands');
+                }
+            },
+            error: handleAjaxError
+        });
+    });
+
+    // Handle Quick Product Form submission
+    $('#quickProductForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        let formData = new FormData(this);
+        formData.append('action', 'quick_add_product');
+        
+        $.ajax({
+            url: 'product_actions.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Close the modal
+                    $('#quickProductModal').modal('hide');
+                    
+                    // Reset the form
+                    $('#quickProductForm')[0].reset();
+                    
+                    // Add the new product to all product selects
+                    let newProduct = response.data;
+                    let description = newProduct.description ? ` (${newProduct.description})` : '';
+                    let brandInfo = newProduct.brand_name ? ` - ${newProduct.brand_name}` : '';
+                    let stockInfo = ` [${newProduct.stock_quantity} in stock]`;
+                    
+                    let option = `<option value="${newProduct.id}" 
+                                        data-price="${newProduct.price}"
+                                        data-stock="${newProduct.stock_quantity}">
+                                    ${newProduct.product_name}${brandInfo}${description}${stockInfo}
+                                </option>`;
+                    
+                    $('.product-select').each(function() {
+                        $(this).append(option);
+                        // If this is the select in the row where quick add was clicked, select the new product
+                        if ($(this).closest('.product-row').find('.quick-add-product').is(':focus')) {
+                            $(this).val(newProduct.id).trigger('change');
+                        }
+                    });
+                    
+                    // Show success message
+                    showAlert('success', 'Product added successfully');
+                } else {
+                    showAlert('error', response.message || 'Failed to add product');
+                }
+            },
+            error: handleAjaxError
+        });
+    });
 });
 </script> 
