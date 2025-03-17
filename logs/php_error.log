@@ -1,0 +1,123 @@
+[17-Mar-2025 10:15:05 Asia/Karachi] Action received: fetch
+[17-Mar-2025 10:15:05 Asia/Karachi] GET params: Array
+(
+    [action] => fetch
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742188504925
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] POST params: Array
+(
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] Action received: get_customers
+[17-Mar-2025 10:15:05 Asia/Karachi] GET params: Array
+(
+    [action] => get_customers
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] POST params: Array
+(
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] Customers found: Array
+(
+    [0] => Array
+        (
+            [customer_id] => 1
+            [name] => imran
+            [contact_number] => 03224487954
+        )
+
+    [1] => Array
+        (
+            [customer_id] => 3
+            [name] => javed
+            [contact_number] => 03255487454
+        )
+
+    [2] => Array
+        (
+            [customer_id] => 2
+            [name] => qasim
+            [contact_number] => 03225578964
+        )
+
+    [3] => Array
+        (
+            [customer_id] => 4
+            [name] => usman
+            [contact_number] => 03224487854
+        )
+
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] Action received: get_products
+[17-Mar-2025 10:15:05 Asia/Karachi] GET params: Array
+(
+    [action] => get_products
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] POST params: Array
+(
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] Action received: fetch
+[17-Mar-2025 10:15:05 Asia/Karachi] GET params: Array
+(
+    [action] => fetch
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742188504926
+)
+
+[17-Mar-2025 10:15:05 Asia/Karachi] POST params: Array
+(
+)
+
+[17-Mar-2025 10:15:09 Asia/Karachi] Action received: get_quotation
+[17-Mar-2025 10:15:09 Asia/Karachi] GET params: Array
+(
+    [action] => get_quotation
+    [id] => 4
+)
+
+[17-Mar-2025 10:15:09 Asia/Karachi] POST params: Array
+(
+)
+
+[17-Mar-2025 10:15:12 Asia/Karachi] Action received: convert_to_sale
+[17-Mar-2025 10:15:12 Asia/Karachi] GET params: Array
+(
+)
+
+[17-Mar-2025 10:15:12 Asia/Karachi] POST params: Array
+(
+    [action] => convert_to_sale
+    [quotation_id] => 4
+)
+
+[17-Mar-2025 10:15:12 Asia/Karachi] Starting quotation conversion process...
+[17-Mar-2025 10:15:12 Asia/Karachi] Converting quotation ID: 4
+[17-Mar-2025 10:15:12 Asia/Karachi] Classes loaded successfully
+[17-Mar-2025 10:15:12 Asia/Karachi] Starting conversion process...
+[17-Mar-2025 10:16:11 Asia/Karachi] Action received: convert_to_sale
+[17-Mar-2025 10:16:11 Asia/Karachi] GET params: Array
+(
+)
+
+[17-Mar-2025 10:16:11 Asia/Karachi] POST params: Array
+(
+    [action] => convert_to_sale
+    [quotation_id] => 4
+)
+
+[17-Mar-2025 10:16:11 Asia/Karachi] Starting quotation conversion process...
+[17-Mar-2025 10:16:11 Asia/Karachi] Converting quotation ID: 4
+[17-Mar-2025 10:16:11 Asia/Karachi] Classes loaded successfully
+[17-Mar-2025 10:16:11 Asia/Karachi] Starting conversion process...

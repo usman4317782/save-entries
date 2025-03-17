@@ -23,9 +23,9 @@
                             <li><a class="dropdown-item" href="#" id="printQuotation80mm">80mm Receipt</a></li>
                         </ul>
                     </div>
-                    <button id="convertToSale" class="btn btn-success me-2">
+                    <!-- <button id="convertToSale" class="btn btn-success me-2">
                         <i class="bi bi-arrow-right-circle me-2"></i>Convert to Sale
-                    </button>
+                    </button> -->
                     <button id="editQuotation" class="btn btn-warning me-2">
                         <i class="bi bi-pencil me-2"></i>Edit
                     </button>

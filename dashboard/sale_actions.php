@@ -417,7 +417,7 @@ try {
     ]);
     exit;
 }
-
 function generateInvoiceNumber() {
     return 'INV-' . date('Ymd') . '-' . substr(uniqid(), -5);
 }
+
