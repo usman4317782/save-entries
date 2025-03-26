@@ -1,0 +1,4885 @@
+[2025-03-25 06:56:38] Script started
+[2025-03-25 06:56:38] Database connection established
+[2025-03-25 06:56:38] Action received: get_customers
+[2025-03-25 06:56:38] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 06:56:38] POST params: Array
+(
+)
+
+[2025-03-25 06:56:38] Script started
+[2025-03-25 06:56:38] Database connection established
+[2025-03-25 06:56:38] Action received: get_products
+[2025-03-25 06:56:38] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 06:56:38] POST params: Array
+(
+)
+
+[2025-03-25 06:56:38] Script started
+[2025-03-25 06:56:38] Database connection established
+[2025-03-25 06:56:38] Action received: get_sale_return
+[2025-03-25 06:56:38] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 06:56:38] POST params: Array
+(
+)
+
+[2025-03-25 06:56:38] Fetching sale return with ID: 2
+[2025-03-25 06:57:42] Script started
+[2025-03-25 06:57:42] Database connection established
+[2025-03-25 06:57:42] Action received: get_customers
+[2025-03-25 06:57:42] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 06:57:42] POST params: Array
+(
+)
+
+[2025-03-25 06:57:42] Script started
+[2025-03-25 06:57:42] Database connection established
+[2025-03-25 06:57:42] Action received: get_products
+[2025-03-25 06:57:42] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 06:57:42] POST params: Array
+(
+)
+
+[2025-03-25 06:57:42] Script started
+[2025-03-25 06:57:42] Database connection established
+[2025-03-25 06:57:42] Action received: fetch
+[2025-03-25 06:57:42] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742867862060
+)
+
+[2025-03-25 06:57:42] POST params: Array
+(
+)
+
+[2025-03-25 06:57:43] Script started
+[2025-03-25 06:57:43] Database connection established
+[2025-03-25 06:57:43] Action received: fetch
+[2025-03-25 06:57:43] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742867862061
+)
+
+[2025-03-25 06:57:43] POST params: Array
+(
+)
+
+[2025-03-25 06:57:55] Script started
+[2025-03-25 06:57:55] Database connection established
+[2025-03-25 06:57:55] Action received: fetch
+[2025-03-25 06:57:55] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742867875786
+)
+
+[2025-03-25 06:57:55] POST params: Array
+(
+)
+
+[2025-03-25 06:57:55] Script started
+[2025-03-25 06:57:56] Database connection established
+[2025-03-25 06:57:56] Action received: get_products
+[2025-03-25 06:57:56] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 06:57:56] POST params: Array
+(
+)
+
+[2025-03-25 06:57:56] Script started
+[2025-03-25 06:57:56] Database connection established
+[2025-03-25 06:57:56] Action received: get_customers
+[2025-03-25 06:57:56] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 06:57:56] POST params: Array
+(
+)
+
+[2025-03-25 06:57:57] Script started
+[2025-03-25 06:57:57] Database connection established
+[2025-03-25 06:57:57] Action received: fetch
+[2025-03-25 06:57:57] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742867875787
+)
+
+[2025-03-25 06:57:57] POST params: Array
+(
+)
+
+[2025-03-25 06:57:58] Script started
+[2025-03-25 06:57:58] Database connection established
+[2025-03-25 06:57:58] Action received: get_customers
+[2025-03-25 06:57:58] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 06:57:58] POST params: Array
+(
+)
+
+[2025-03-25 06:57:58] Script started
+[2025-03-25 06:57:58] Database connection established
+[2025-03-25 06:57:58] Action received: get_products
+[2025-03-25 06:57:58] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 06:57:58] POST params: Array
+(
+)
+
+[2025-03-25 06:57:58] Script started
+[2025-03-25 06:57:58] Database connection established
+[2025-03-25 06:57:58] Action received: fetch
+[2025-03-25 06:57:58] GET params: Array
+(
+    [action] => fetch
+    [draw] => 3
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742867875788
+)
+
+[2025-03-25 06:57:58] POST params: Array
+(
+)
+
+[2025-03-25 07:00:50] Script started
+[2025-03-25 07:00:50] Database connection established
+[2025-03-25 07:00:50] Action received: fetch
+[2025-03-25 07:00:50] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868050445
+)
+
+[2025-03-25 07:00:50] POST params: Array
+(
+)
+
+[2025-03-25 07:00:50] Script started
+[2025-03-25 07:00:50] Database connection established
+[2025-03-25 07:00:50] Action received: get_customers
+[2025-03-25 07:00:50] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:00:50] POST params: Array
+(
+)
+
+[2025-03-25 07:00:50] Script started
+[2025-03-25 07:00:50] Database connection established
+[2025-03-25 07:00:50] Action received: get_products
+[2025-03-25 07:00:50] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:00:50] POST params: Array
+(
+)
+
+[2025-03-25 07:00:51] Script started
+[2025-03-25 07:00:51] Database connection established
+[2025-03-25 07:00:51] Action received: fetch
+[2025-03-25 07:00:51] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868050446
+)
+
+[2025-03-25 07:00:51] POST params: Array
+(
+)
+
+[2025-03-25 07:00:52] Script started
+[2025-03-25 07:00:52] Database connection established
+[2025-03-25 07:00:52] Action received: get_customers
+[2025-03-25 07:00:52] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:00:52] POST params: Array
+(
+)
+
+[2025-03-25 07:00:53] Script started
+[2025-03-25 07:00:53] Database connection established
+[2025-03-25 07:00:53] Action received: get_sale_return
+[2025-03-25 07:00:53] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 07:00:53] POST params: Array
+(
+)
+
+[2025-03-25 07:00:53] Fetching sale return with ID: 2
+[2025-03-25 07:01:32] Script started
+[2025-03-25 07:01:32] Database connection established
+[2025-03-25 07:01:32] Action received: get_sale_return
+[2025-03-25 07:01:32] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 07:01:32] POST params: Array
+(
+)
+
+[2025-03-25 07:01:32] Fetching sale return with ID: 2
+[2025-03-25 07:01:37] Script started
+[2025-03-25 07:01:37] Database connection established
+[2025-03-25 07:01:37] Action received: fetch
+[2025-03-25 07:01:37] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868097417
+)
+
+[2025-03-25 07:01:37] POST params: Array
+(
+)
+
+[2025-03-25 07:01:37] Script started
+[2025-03-25 07:01:37] Database connection established
+[2025-03-25 07:01:37] Action received: get_customers
+[2025-03-25 07:01:37] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:01:37] POST params: Array
+(
+)
+
+[2025-03-25 07:01:37] Script started
+[2025-03-25 07:01:37] Database connection established
+[2025-03-25 07:01:37] Action received: get_products
+[2025-03-25 07:01:37] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:01:37] POST params: Array
+(
+)
+
+[2025-03-25 07:01:38] Script started
+[2025-03-25 07:01:38] Database connection established
+[2025-03-25 07:01:38] Action received: fetch
+[2025-03-25 07:01:38] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868097418
+)
+
+[2025-03-25 07:01:38] POST params: Array
+(
+)
+
+[2025-03-25 07:01:42] Script started
+[2025-03-25 07:01:42] Database connection established
+[2025-03-25 07:01:42] Action received: get_sale_return
+[2025-03-25 07:01:42] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 07:01:42] POST params: Array
+(
+)
+
+[2025-03-25 07:01:42] Fetching sale return with ID: 2
+[2025-03-25 07:02:25] Script started
+[2025-03-25 07:02:25] Database connection established
+[2025-03-25 07:02:25] Action received: fetch
+[2025-03-25 07:02:25] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868145293
+)
+
+[2025-03-25 07:02:25] POST params: Array
+(
+)
+
+[2025-03-25 07:02:25] Script started
+[2025-03-25 07:02:25] Database connection established
+[2025-03-25 07:02:25] Action received: get_products
+[2025-03-25 07:02:25] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:02:25] POST params: Array
+(
+)
+
+[2025-03-25 07:02:25] Script started
+[2025-03-25 07:02:25] Database connection established
+[2025-03-25 07:02:25] Action received: get_customers
+[2025-03-25 07:02:25] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:02:25] POST params: Array
+(
+)
+
+[2025-03-25 07:02:26] Script started
+[2025-03-25 07:02:26] Database connection established
+[2025-03-25 07:02:26] Action received: fetch
+[2025-03-25 07:02:26] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868145294
+)
+
+[2025-03-25 07:02:26] POST params: Array
+(
+)
+
+[2025-03-25 07:05:53] Script started
+[2025-03-25 07:05:53] Database connection established
+[2025-03-25 07:05:53] Action received: fetch
+[2025-03-25 07:05:53] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868352718
+)
+
+[2025-03-25 07:05:53] POST params: Array
+(
+)
+
+[2025-03-25 07:05:53] Script started
+[2025-03-25 07:05:53] Database connection established
+[2025-03-25 07:05:53] Action received: get_customers
+[2025-03-25 07:05:53] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:05:53] POST params: Array
+(
+)
+
+[2025-03-25 07:05:53] Script started
+[2025-03-25 07:05:53] Database connection established
+[2025-03-25 07:05:53] Action received: get_products
+[2025-03-25 07:05:53] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:05:53] POST params: Array
+(
+)
+
+[2025-03-25 07:05:55] Script started
+[2025-03-25 07:05:55] Database connection established
+[2025-03-25 07:05:55] Action received: fetch
+[2025-03-25 07:05:55] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868352719
+)
+
+[2025-03-25 07:05:55] POST params: Array
+(
+)
+
+[2025-03-25 07:05:57] Script started
+[2025-03-25 07:05:57] Database connection established
+[2025-03-25 07:05:57] Action received: get_sale_return
+[2025-03-25 07:05:57] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 07:05:57] POST params: Array
+(
+)
+
+[2025-03-25 07:05:57] Fetching sale return with ID: 2
+[2025-03-25 07:06:05] Script started
+[2025-03-25 07:06:05] Database connection established
+[2025-03-25 07:06:05] Action received: fetch
+[2025-03-25 07:06:05] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868365332
+)
+
+[2025-03-25 07:06:05] POST params: Array
+(
+)
+
+[2025-03-25 07:06:05] Script started
+[2025-03-25 07:06:05] Database connection established
+[2025-03-25 07:06:05] Action received: get_customers
+[2025-03-25 07:06:05] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:06:05] POST params: Array
+(
+)
+
+[2025-03-25 07:06:05] Script started
+[2025-03-25 07:06:05] Database connection established
+[2025-03-25 07:06:05] Action received: get_products
+[2025-03-25 07:06:05] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:06:05] POST params: Array
+(
+)
+
+[2025-03-25 07:06:06] Script started
+[2025-03-25 07:06:06] Database connection established
+[2025-03-25 07:06:06] Action received: fetch
+[2025-03-25 07:06:06] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868365333
+)
+
+[2025-03-25 07:06:06] POST params: Array
+(
+)
+
+[2025-03-25 07:06:08] Script started
+[2025-03-25 07:06:08] Database connection established
+[2025-03-25 07:06:08] Action received: get_customers
+[2025-03-25 07:06:08] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:06:08] POST params: Array
+(
+)
+
+[2025-03-25 07:06:08] Script started
+[2025-03-25 07:06:08] Database connection established
+[2025-03-25 07:06:08] Action received: get_sale_return
+[2025-03-25 07:06:08] GET params: Array
+(
+    [action] => get_sale_return
+    [return_id] => 2
+)
+
+[2025-03-25 07:06:08] POST params: Array
+(
+)
+
+[2025-03-25 07:06:08] Fetching sale return with ID: 2
+[2025-03-25 07:07:31] Script started
+[2025-03-25 07:07:31] Database connection established
+[2025-03-25 07:07:31] Action received: get_customers
+[2025-03-25 07:07:31] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:07:31] POST params: Array
+(
+)
+
+[2025-03-25 07:07:31] Script started
+[2025-03-25 07:07:31] Database connection established
+[2025-03-25 07:07:31] Action received: fetch
+[2025-03-25 07:07:31] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868451338
+)
+
+[2025-03-25 07:07:31] POST params: Array
+(
+)
+
+[2025-03-25 07:07:31] Script started
+[2025-03-25 07:07:31] Database connection established
+[2025-03-25 07:07:31] Action received: get_products
+[2025-03-25 07:07:31] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:07:31] POST params: Array
+(
+)
+
+[2025-03-25 07:07:32] Script started
+[2025-03-25 07:07:32] Database connection established
+[2025-03-25 07:07:32] Action received: fetch
+[2025-03-25 07:07:32] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868451339
+)
+
+[2025-03-25 07:07:32] POST params: Array
+(
+)
+
+[2025-03-25 07:07:34] Script started
+[2025-03-25 07:07:34] Database connection established
+[2025-03-25 07:07:34] Action received: get_customers
+[2025-03-25 07:07:34] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:07:34] POST params: Array
+(
+)
+
+[2025-03-25 07:07:34] Script started
+[2025-03-25 07:07:34] Database connection established
+[2025-03-25 07:07:34] Action received: get_products
+[2025-03-25 07:07:34] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:07:34] POST params: Array
+(
+)
+
+[2025-03-25 07:07:34] Script started
+[2025-03-25 07:07:34] Database connection established
+[2025-03-25 07:07:34] Action received: fetch
+[2025-03-25 07:07:34] GET params: Array
+(
+    [action] => fetch
+    [draw] => 3
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868451340
+)
+
+[2025-03-25 07:07:34] POST params: Array
+(
+)
+
+[2025-03-25 07:07:52] Script started
+[2025-03-25 07:07:52] Database connection established
+[2025-03-25 07:07:52] Action received: create_sale_return
+[2025-03-25 07:07:52] GET params: Array
+(
+)
+
+[2025-03-25 07:07:52] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:57] Script started
+[2025-03-25 07:07:57] Database connection established
+[2025-03-25 07:07:57] Action received: create_sale_return
+[2025-03-25 07:07:57] GET params: Array
+(
+)
+
+[2025-03-25 07:07:57] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:58] Script started
+[2025-03-25 07:07:58] Database connection established
+[2025-03-25 07:07:58] Action received: create_sale_return
+[2025-03-25 07:07:58] GET params: Array
+(
+)
+
+[2025-03-25 07:07:58] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:58] Script started
+[2025-03-25 07:07:58] Database connection established
+[2025-03-25 07:07:58] Action received: create_sale_return
+[2025-03-25 07:07:58] GET params: Array
+(
+)
+
+[2025-03-25 07:07:58] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:58] Script started
+[2025-03-25 07:07:58] Database connection established
+[2025-03-25 07:07:58] Action received: create_sale_return
+[2025-03-25 07:07:58] GET params: Array
+(
+)
+
+[2025-03-25 07:07:58] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:59] Script started
+[2025-03-25 07:07:59] Database connection established
+[2025-03-25 07:07:59] Action received: create_sale_return
+[2025-03-25 07:07:59] GET params: Array
+(
+)
+
+[2025-03-25 07:07:59] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:59] Script started
+[2025-03-25 07:07:59] Database connection established
+[2025-03-25 07:07:59] Action received: create_sale_return
+[2025-03-25 07:07:59] GET params: Array
+(
+)
+
+[2025-03-25 07:07:59] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:59] Script started
+[2025-03-25 07:07:59] Database connection established
+[2025-03-25 07:07:59] Action received: create_sale_return
+[2025-03-25 07:07:59] GET params: Array
+(
+)
+
+[2025-03-25 07:07:59] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:07:59] Script started
+[2025-03-25 07:07:59] Database connection established
+[2025-03-25 07:07:59] Action received: create_sale_return
+[2025-03-25 07:07:59] GET params: Array
+(
+)
+
+[2025-03-25 07:07:59] POST params: Array
+(
+    [customer_id] => 1
+    [return_date] => 2025-03-04
+    [product_id] => Array
+        (
+            [0] => 11
+            [1] => 17
+        )
+
+    [quantity] => Array
+        (
+            [0] => 12
+            [1] => 12
+        )
+
+    [price] => Array
+        (
+            [0] => 55
+            [1] => 123
+        )
+
+    [discount] => Array
+        (
+            [0] => 
+            [1] => 
+        )
+
+    [total] => Array
+        (
+            [0] => 660.00
+            [1] => 1476.00
+        )
+
+    [total_amount] => 2136.00
+    [tax] => 0
+    [final_amount] => 2136.00
+    [payment_method] => cash
+    [notes] => sdfsdfsdfsdf
+    [action] => create_sale_return
+    [items] => [{"product_id":"11","quantity":"12","unit_price":"55","discount":0,"total_price":"660.00"},{"product_id":"17","quantity":"12","unit_price":"123","discount":0,"total_price":"1476.00"}]
+)
+
+[2025-03-25 07:08:09] Script started
+[2025-03-25 07:08:09] Database connection established
+[2025-03-25 07:08:09] Action received: fetch
+[2025-03-25 07:08:09] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868489387
+)
+
+[2025-03-25 07:08:09] POST params: Array
+(
+)
+
+[2025-03-25 07:08:09] Script started
+[2025-03-25 07:08:09] Database connection established
+[2025-03-25 07:08:09] Action received: get_customers
+[2025-03-25 07:08:09] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:08:09] POST params: Array
+(
+)
+
+[2025-03-25 07:08:09] Script started
+[2025-03-25 07:08:09] Database connection established
+[2025-03-25 07:08:09] Action received: get_products
+[2025-03-25 07:08:09] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:08:09] POST params: Array
+(
+)
+
+[2025-03-25 07:08:10] Script started
+[2025-03-25 07:08:10] Database connection established
+[2025-03-25 07:08:10] Action received: fetch
+[2025-03-25 07:08:10] GET params: Array
+(
+    [action] => fetch
+    [draw] => 2
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868489388
+)
+
+[2025-03-25 07:08:10] POST params: Array
+(
+)
+
+[2025-03-25 07:08:13] Script started
+[2025-03-25 07:08:13] Database connection established
+[2025-03-25 07:08:13] Action received: fetch
+[2025-03-25 07:08:13] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868493425
+)
+
+[2025-03-25 07:08:13] POST params: Array
+(
+)
+
+[2025-03-25 07:08:13] Script started
+[2025-03-25 07:08:13] Database connection established
+[2025-03-25 07:08:13] Action received: get_products
+[2025-03-25 07:08:13] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:08:13] POST params: Array
+(
+)
+
+[2025-03-25 07:08:13] Script started
+[2025-03-25 07:08:13] Database connection established
+[2025-03-25 07:08:13] Action received: get_customers
+[2025-03-25 07:08:13] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:08:13] POST params: Array
+(
+)
+
+[2025-03-25 07:10:21] Script started
+[2025-03-25 07:10:21] Database connection established
+[2025-03-25 07:10:21] Action received: fetch
+[2025-03-25 07:10:21] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 3
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 10
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868621694
+)
+
+[2025-03-25 07:10:21] POST params: Array
+(
+)
+
+[2025-03-25 07:10:21] Script started
+[2025-03-25 07:10:21] Database connection established
+[2025-03-25 07:10:21] Action received: get_customers
+[2025-03-25 07:10:21] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:10:21] POST params: Array
+(
+)
+
+[2025-03-25 07:10:21] Script started
+[2025-03-25 07:10:21] Database connection established
+[2025-03-25 07:10:21] Action received: get_products
+[2025-03-25 07:10:21] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:10:21] POST params: Array
+(
+)
+
+[2025-03-25 07:10:24] Script started
+[2025-03-25 07:10:24] Database connection established
+[2025-03-25 07:10:24] Action received: get_customers
+[2025-03-25 07:10:24] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:10:24] POST params: Array
+(
+)
+
+[2025-03-25 07:10:24] Script started
+[2025-03-25 07:10:24] Database connection established
+[2025-03-25 07:10:24] Action received: get_products
+[2025-03-25 07:10:24] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:10:24] POST params: Array
+(
+)
+
+[2025-03-25 07:13:29] Script started
+[2025-03-25 07:13:29] Database connection established
+[2025-03-25 07:13:29] Action received: fetch
+[2025-03-25 07:13:29] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 4
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 25
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868809350
+)
+
+[2025-03-25 07:13:29] POST params: Array
+(
+)
+
+[2025-03-25 07:13:29] Script started
+[2025-03-25 07:13:29] Database connection established
+[2025-03-25 07:13:29] Action received: get_products
+[2025-03-25 07:13:29] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:13:29] POST params: Array
+(
+)
+
+[2025-03-25 07:13:29] Script started
+[2025-03-25 07:13:29] Database connection established
+[2025-03-25 07:13:29] Action received: get_customers
+[2025-03-25 07:13:29] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:13:29] POST params: Array
+(
+)
+
+[2025-03-25 07:13:32] Script started
+[2025-03-25 07:13:32] Database connection established
+[2025-03-25 07:13:32] Action received: get_products
+[2025-03-25 07:13:32] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:13:32] POST params: Array
+(
+)
+
+[2025-03-25 07:13:32] Script started
+[2025-03-25 07:13:32] Database connection established
+[2025-03-25 07:13:32] Action received: get_customers
+[2025-03-25 07:13:32] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:13:32] POST params: Array
+(
+)
+
+[2025-03-25 07:14:43] Script started
+[2025-03-25 07:14:43] Database connection established
+[2025-03-25 07:14:43] Action received: fetch
+[2025-03-25 07:14:43] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 4
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 25
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868883124
+)
+
+[2025-03-25 07:14:43] POST params: Array
+(
+)
+
+[2025-03-25 07:14:43] Script started
+[2025-03-25 07:14:43] Database connection established
+[2025-03-25 07:14:43] Action received: get_customers
+[2025-03-25 07:14:43] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:14:43] POST params: Array
+(
+)
+
+[2025-03-25 07:14:43] Script started
+[2025-03-25 07:14:43] Database connection established
+[2025-03-25 07:14:43] Action received: get_products
+[2025-03-25 07:14:43] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:14:43] POST params: Array
+(
+)
+
+[2025-03-25 07:14:44] Script started
+[2025-03-25 07:14:45] Database connection established
+[2025-03-25 07:14:45] Action received: get_customers
+[2025-03-25 07:14:45] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:14:45] POST params: Array
+(
+)
+
+[2025-03-25 07:14:45] Script started
+[2025-03-25 07:14:45] Database connection established
+[2025-03-25 07:14:45] Action received: get_products
+[2025-03-25 07:14:45] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:14:45] POST params: Array
+(
+)
+
+[2025-03-25 07:15:28] Script started
+[2025-03-25 07:15:28] Database connection established
+[2025-03-25 07:15:28] Action received: fetch
+[2025-03-25 07:15:28] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 4
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 25
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742868928229
+)
+
+[2025-03-25 07:15:28] POST params: Array
+(
+)
+
+[2025-03-25 07:15:28] Script started
+[2025-03-25 07:15:28] Database connection established
+[2025-03-25 07:15:28] Action received: get_customers
+[2025-03-25 07:15:28] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:15:28] POST params: Array
+(
+)
+
+[2025-03-25 07:15:28] Script started
+[2025-03-25 07:15:28] Database connection established
+[2025-03-25 07:15:28] Action received: get_products
+[2025-03-25 07:15:28] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:15:28] POST params: Array
+(
+)
+
+[2025-03-25 07:15:30] Script started
+[2025-03-25 07:15:30] Database connection established
+[2025-03-25 07:15:30] Action received: get_products
+[2025-03-25 07:15:30] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:15:30] POST params: Array
+(
+)
+
+[2025-03-25 07:15:30] Script started
+[2025-03-25 07:15:30] Database connection established
+[2025-03-25 07:15:30] Action received: get_customers
+[2025-03-25 07:15:30] GET params: Array
+(
+    [action] => get_customers
+)
+
+[2025-03-25 07:15:30] POST params: Array
+(
+)
+
+[2025-03-25 07:16:44] Script started
+[2025-03-25 07:16:44] Database connection established
+[2025-03-25 07:16:44] Action received: get_products
+[2025-03-25 07:16:44] GET params: Array
+(
+    [action] => get_products
+)
+
+[2025-03-25 07:16:44] POST params: Array
+(
+)
+
+[2025-03-25 07:16:44] Script started
+[2025-03-25 07:16:44] Database connection established
+[2025-03-25 07:16:44] Action received: fetch
+[2025-03-25 07:16:44] GET params: Array
+(
+    [action] => fetch
+    [draw] => 1
+    [columns] => Array
+        (
+            [0] => Array
+                (
+                    [data] => id
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => false
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [data] => invoice_number
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [data] => customer_name
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [data] => return_date
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [5] => Array
+                (
+                    [data] => final_amount
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [6] => Array
+                (
+                    [data] => payment_status
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+            [7] => Array
+                (
+                    [data] => 
+                    [name] => 
+                    [searchable] => true
+                    [orderable] => true
+                    [search] => Array
+                        (
+                            [value] => 
+                            [regex] => false
+                        )
+
+                )
+
+        )
+
+    [order] => Array
+        (
+            [0] => Array
+                (
+                    [column] => 4
+                    [dir] => desc
+                )
+
+        )
+
+    [start] => 0
+    [length] => 25
+    [search] => 
+    [customer_id] => 
+    [start_date] => 
+    [end_date] => 
+    [_] => 1742869004058
+)
+
+[2025-03-25 07:16:44] POST params: Array
+(
+)
+
+[2025-03-25 07:16:48] Script started
+[2025-03-25 07:16:48] Database connection established
+[2025-03-25 07:16:48] Action received: get_customers
+[2025-03-25 07:16:48] GET params: Array
+(
+    [action] => get_customers
+    [search] => 
+)
+
+[2025-03-25 07:16:48] POST params: Array
+(
+)
+
+[2025-03-25 07:16:48] Fetching customers
+[2025-03-25 07:16:48] Error fetching customers: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list'

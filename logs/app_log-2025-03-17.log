@@ -736,3 +736,5 @@
 [2025-03-17T11:10:52.553931+05:00] SaveEntries.INFO: File included and script started: product_actions.php [] []
 [2025-03-17T11:11:10.731291+05:00] SaveEntries.INFO: File included and script started: quotation_actions.php [] []
 [2025-03-17T11:11:10.784680+05:00] SaveEntries.INFO: File included and script started: quotation_actions.php [] []
+[2025-03-17T12:32:17.837983+05:00] SaveEntries.INFO: File included and script started: sales.php [] []
+[2025-03-17T12:32:17.894572+05:00] SaveEntries.INFO: File included and script started: index.php [] []

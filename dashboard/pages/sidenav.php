@@ -51,6 +51,7 @@
                 </a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="sales.php" class="dropdown-item">New</a>
+                    <a href="returns.php" class="dropdown-item">Returns</a>
                     <a href="quotations.php" class="dropdown-item">Quotations</a>
                     <!-- <a href="sales.php?status=pending" class="dropdown-item">Pending Sales</a>
                     <a href="sales.php?status=paid" class="dropdown-item">Completed Sales</a>
